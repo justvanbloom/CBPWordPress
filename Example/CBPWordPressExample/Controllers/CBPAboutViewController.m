@@ -9,8 +9,11 @@
 #import <MessageUI/MessageUI.h>
 
 #import "Appirater.h"
-#import "SSCWhatsAppActivity.h"
+#import "GAI.h"
+#import "GAIFields.h"
+#import "GAIDictionaryBuilder.h"
 #import "GPPShareActivity.h"
+#import "SSCWhatsAppActivity.h"
 
 #import "CBPAboutViewController.h"
 #import "CBPSubmitTipViewController.h"
@@ -35,6 +38,14 @@
                                                                                           action:@selector(done)];
     
     self.navigationItem.title = NSLocalizedString(@"About", nil);
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [[GAI sharedInstance].defaultTracker set:kGAIScreenName
+                                       value:@"About Screen"];
 }
 
 #pragma mark -
@@ -180,9 +191,20 @@
             switch (indexPath.row) {
                 case 0:
                     [Appirater rateApp];
+                    
+                    [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"
+                                                                                                        action:@"button_tap"
+                                                                                                         label:@"rate_app"
+                                                                                                         value:nil] build]];
                     break;
-                case 1:
+                case 1: {
+                    [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"
+                                                                                                        action:@"button_tap"
+                                                                                                         label:@"share_app"
+                                                                                                         value:nil] build]];
+                    
                     [self shareAction];
+                }
                     break;
                 case 2:
                 {
@@ -195,8 +217,13 @@
                                                           completion:nil];
                 }
                     break;
-                case 3:
+                case 3:{
+                    [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"
+                                                                                                        action:@"button_tap"
+                                                                                                         label:@"send_email"
+                                                                                                         value:nil] build]];
                     [self sendEmail];
+                }
                     break;
                 default:
                     break;

@@ -8,6 +8,8 @@
 
 #import "BButton.h"
 #import "CBPAppDelegate.h"
+#import "GAI.h"
+#import "GAIFields.h"
 #import "HTEmailAutocompleteTextField.h"
 
 #import "CBPSettingsViewController.h"
@@ -69,6 +71,14 @@ static NSString * const CBPSwitchTableViewCellIdentifier = @"CBPSwitchTableViewC
     self.systemFontSwitch.on = ([defaults floatForKey:CBPUserFontSize]) ? NO : YES;
     
     self.userFontSizeSlider.value = ([defaults floatForKey:CBPUserFontSize])? [defaults floatForKey:CBPUserFontSize] : CBPMinimumFontSize;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [[GAI sharedInstance].defaultTracker set:kGAIScreenName
+                                       value:@"Settings Screen"];
 }
 
 #pragma mark -

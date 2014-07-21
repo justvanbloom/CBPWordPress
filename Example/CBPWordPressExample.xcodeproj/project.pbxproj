@@ -12,6 +12,12 @@
 		341C8037195238E900070FD4 /* tag.snippet.html in Resources */ = {isa = PBXBuildFile; fileRef = 341C8036195238E900070FD4 /* tag.snippet.html */; };
 		341C803919523B8D00070FD4 /* category.snippet.html in Resources */ = {isa = PBXBuildFile; fileRef = 341C803819523B8D00070FD4 /* category.snippet.html */; };
 		34446FE7197D9DC500166229 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34446FE6197D9DC500166229 /* Crashlytics.framework */; };
+		34446FEA197DA8DE00166229 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34446FE9197DA8DE00166229 /* CoreData.framework */; };
+		344470C8197DA94200166229 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 344470C7197DA94200166229 /* libGoogleAnalyticsServices.a */; };
+		344470CA197DA95700166229 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 344470C9197DA95700166229 /* AdSupport.framework */; };
+		344470CC197DA96500166229 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 344470CB197DA96500166229 /* SystemConfiguration.framework */; };
+		344470CE197DA96E00166229 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 344470CD197DA96E00166229 /* libz.dylib */; };
+		344470D0197DAAD500166229 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 344470CF197DAAD500166229 /* libsqlite3.0.dylib */; };
 		347E285F190849B2004D3842 /* CBPCommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 347E285E190849B2004D3842 /* CBPCommentsViewController.m */; };
 		347E286219084AA1004D3842 /* CBPComposeCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 347E286119084AA1004D3842 /* CBPComposeCommentViewController.m */; };
 		349BC6D61975E236008CA989 /* UIViewController+CBPWordPressExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 349BC6D51975E236008CA989 /* UIViewController+CBPWordPressExample.m */; };
@@ -68,6 +74,18 @@
 		341C803819523B8D00070FD4 /* category.snippet.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = category.snippet.html; sourceTree = "<group>"; };
 		34446FE6197D9DC500166229 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		34446FE8197DA3F700166229 /* BSConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BSConstants.h; sourceTree = "<group>"; };
+		34446FE9197DA8DE00166229 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		344470BD197DA92A00166229 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
+		344470BE197DA92A00166229 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		344470C3197DA92A00166229 /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
+		344470C4197DA92A00166229 /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
+		344470C5197DA92A00166229 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
+		344470C6197DA92A00166229 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
+		344470C7197DA94200166229 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalyticsServices.a; path = CBPWordPressExample/Vendor/GoogleAnalyticsServicesiOS/libGoogleAnalyticsServices.a; sourceTree = SOURCE_ROOT; };
+		344470C9197DA95700166229 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		344470CB197DA96500166229 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		344470CD197DA96E00166229 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		344470CF197DAAD500166229 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		347E285D190849B2004D3842 /* CBPCommentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBPCommentsViewController.h; sourceTree = "<group>"; };
 		347E285E190849B2004D3842 /* CBPCommentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBPCommentsViewController.m; sourceTree = "<group>"; };
 		347E286019084AA1004D3842 /* CBPComposeCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBPComposeCommentViewController.h; sourceTree = "<group>"; };
@@ -134,8 +152,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				344470D0197DAAD500166229 /* libsqlite3.0.dylib in Frameworks */,
+				344470CE197DA96E00166229 /* libz.dylib in Frameworks */,
+				344470CC197DA96500166229 /* SystemConfiguration.framework in Frameworks */,
+				344470CA197DA95700166229 /* AdSupport.framework in Frameworks */,
+				34446FEA197DA8DE00166229 /* CoreData.framework in Frameworks */,
 				34E31C5B1953727E00604A39 /* AVFoundation.framework in Frameworks */,
 				34D3693C18E709AF00E14526 /* CoreGraphics.framework in Frameworks */,
+				344470C8197DA94200166229 /* libGoogleAnalyticsServices.a in Frameworks */,
 				34D3693E18E709AF00E14526 /* UIKit.framework in Frameworks */,
 				34D3693A18E709AF00E14526 /* Foundation.framework in Frameworks */,
 				34446FE7197D9DC500166229 /* Crashlytics.framework in Frameworks */,
@@ -156,9 +180,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		344470BC197DA92A00166229 /* Google Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				344470BD197DA92A00166229 /* GAI.h */,
+				344470BE197DA92A00166229 /* GAIDictionaryBuilder.h */,
+				344470C3197DA92A00166229 /* GAIFields.h */,
+				344470C4197DA92A00166229 /* GAILogger.h */,
+				344470C5197DA92A00166229 /* GAITrackedViewController.h */,
+				344470C6197DA92A00166229 /* GAITracker.h */,
+				344470C7197DA94200166229 /* libGoogleAnalyticsServices.a */,
+			);
+			name = "Google Analytics";
+			path = Vendor/GoogleAnalyticsServicesiOS/GoogleAnalytics/Library;
+			sourceTree = "<group>";
+		};
 		349C67FD1958C5F000D25654 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				344470BC197DA92A00166229 /* Google Analytics */,
 				F571656D197588710005227C /* google-toolbox-for-mac */,
 			);
 			name = Vendor;
@@ -223,11 +263,16 @@
 		34D3693818E709AF00E14526 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				344470C9197DA95700166229 /* AdSupport.framework */,
 				34E31C5A1953727E00604A39 /* AVFoundation.framework */,
+				34446FE9197DA8DE00166229 /* CoreData.framework */,
 				34D3693B18E709AF00E14526 /* CoreGraphics.framework */,
 				34446FE6197D9DC500166229 /* Crashlytics.framework */,
 				34D3693918E709AF00E14526 /* Foundation.framework */,
 				5D58735488124103BBB09705 /* libPods.a */,
+				344470CF197DAAD500166229 /* libsqlite3.0.dylib */,
+				344470CD197DA96E00166229 /* libz.dylib */,
+				344470CB197DA96500166229 /* SystemConfiguration.framework */,
 				34D3693D18E709AF00E14526 /* UIKit.framework */,
 				34D3695818E709AF00E14526 /* XCTest.framework */,
 			);
@@ -658,6 +703,10 @@
 				GCC_PREFIX_HEADER = "CBPWordPressExample/CBPWordPressExample-Prefix.pch";
 				INFOPLIST_FILE = "CBPWordPressExample/CBPWordPressExample-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/CBPWordPressExample/Vendor/GoogleAnalyticsServicesiOS",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -680,6 +729,10 @@
 				GCC_PREFIX_HEADER = "CBPWordPressExample/CBPWordPressExample-Prefix.pch";
 				INFOPLIST_FILE = "CBPWordPressExample/CBPWordPressExample-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/CBPWordPressExample/Vendor/GoogleAnalyticsServicesiOS",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;

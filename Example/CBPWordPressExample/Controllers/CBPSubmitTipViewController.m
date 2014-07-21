@@ -8,6 +8,9 @@
 
 #import "AFHTTPRequestOperationManager.h"
 #import "BButton.h"
+#import "GAI.h"
+#import "GAIFields.h"
+#import "GAIDictionaryBuilder.h"
 #import "GTMUIImage+Resize.h"
 #import "HTEmailAutocompleteTextField.h"
 #import "MBProgressHUD.h"
@@ -55,9 +58,9 @@
     self.nameTextField.text = [defaults objectForKey:CBPCommenterName];
     self.emailTextField.text = [defaults objectForKey:CBPCommenterEmail];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                           target:self
-                                                                                          action:@selector(doneAction)];
+                                                                                          action:@selector(cancelAction)];
     
     
     [self.tableView registerClass:[CBPTextFieldTableViewCell class] forCellReuseIdentifier:CBPTextFieldTableViewCellIdentifier];
@@ -66,13 +69,21 @@
     [self makeFooter];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillDisappear:animated];
+    [super viewWillAppear:animated];
+    
+    [[GAI sharedInstance].defaultTracker set:kGAIScreenName
+                                       value:@"Tip Screen"];
 }
 
-- (void)doneAction
+- (void)cancelAction
 {
+    [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"
+                                                                                        action:@"button_tap"
+                                                                                         label:@"cancel_tip"
+                                                                                         value:nil] build]];
+    
     [[self parentViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -186,6 +197,11 @@
                                            [MBProgressHUD hideHUDForView:self.view animated:YES];
                                        }];
     [op start];
+    
+    [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"
+                                                                                        action:@"button_tap"
+                                                                                         label:@"post_tip"
+                                                                                         value:nil] build]];
 }
 
 - (void)makeFooter

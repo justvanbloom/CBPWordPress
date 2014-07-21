@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GAITrackedViewController.h"
 
-@interface CBPTableViewController : UIViewController <UITableViewDelegate>
+@interface CBPTableViewController : GAITrackedViewController <UITableViewDelegate>
 @property (nonatomic, assign) BOOL canInfiniteLoad;
 @property (nonatomic, assign) BOOL canPullToRefresh;
 @property (nonatomic) UITableView *tableView;

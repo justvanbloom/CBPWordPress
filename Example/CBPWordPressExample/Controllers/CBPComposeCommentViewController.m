@@ -6,6 +6,9 @@
 //  Copyright (c) 2014 Crayons and Brown Paper. All rights reserved.
 //
 
+#import "GAI.h"
+#import "GAIFields.h"
+#import "GAIDictionaryBuilder.h"
 #import "HTEmailAutocompleteTextField.h"
 #import "MBProgressHUD.h"
 #import "SAMTextView.h"
@@ -57,8 +60,6 @@
     [self updateViewConstraints];
 }
 
-
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -80,6 +81,14 @@
     self.urlTextField.text = [defaults objectForKey:CBPCommenterURL];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [[GAI sharedInstance].defaultTracker set:kGAIScreenName
+                                       value:@"Compose Comment Screen"];
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -98,6 +107,10 @@
 #pragma mark - Button Actions
 - (void)cancelAction
 {
+    [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"
+                                                                                        action:@"button_tap"
+                                                                                         label:@"cancel_comment"
+                                                                                         value:nil] build]];
     self.completionBlock(nil, nil);
 }
 
@@ -144,6 +157,10 @@
                                 strongSelf.completionBlock(comment, nil);
                                 
                             }];
+    [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"
+                                                                                        action:@"button_tap"
+                                                                                         label:@"post_comment"
+                                                                                         value:nil] build]];
 }
 
 - (BOOL)validate

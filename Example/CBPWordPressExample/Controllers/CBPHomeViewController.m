@@ -56,6 +56,8 @@
 {
     [super viewDidLoad];
 
+    self.screenName = @"Home Screen";
+    
     UIButton *button = [UIButton buttonWithType:UIButtonTypeInfoLight];
     
     button.frame = CGRectMake(button.frame.origin.x, button.frame.origin.y, button.frame.size.width + 13, button.frame.size.height);

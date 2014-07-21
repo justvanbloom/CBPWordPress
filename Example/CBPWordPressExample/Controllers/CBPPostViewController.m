@@ -11,9 +11,13 @@
 #import "NSString+CBPWordPressExample.h"
 #import "NSString+HTML.h"
 
-#import "SSCWhatsAppActivity.h"
+#import "GAI.h"
+#import "GAIFields.h"
+#import "GAIDictionaryBuilder.h"
+
 #import "GPPShareActivity.h"
 #import "MHGallery.h"
+#import "SSCWhatsAppActivity.h"
 #import "TOWebViewController.h"
 
 #import "CBPCommentsViewController.h"
@@ -366,7 +370,13 @@ static NSString * const kFrameString = @"frame";
     
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:vc];
     
-    [self presentViewController:navController animated:YES completion:nil];
+    [self presentViewController:navController animated:YES
+                     completion:^(){
+                         [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"
+                                                                                                             action:@"button_tap"
+                                                                                                              label:@"compose"
+                                                                                                              value:nil] build]];
+                     }];
 }
 
 - (void)sharePostAction
@@ -378,7 +388,13 @@ static NSString * const kFrameString = @"frame";
     
     activityViewController.excludedActivityTypes = @[UIActivityTypePostToWeibo, UIActivityTypeAssignToContact, UIActivityTypeAirDrop, UIActivityTypePostToTencentWeibo ];
     
-    [self presentViewController:activityViewController animated:YES completion:NULL];
+    [self presentViewController:activityViewController animated:YES
+                     completion:^() {
+                         [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"
+                                                                                                             action:@"button_tap"
+                                                                                                              label:@"share"
+                                                                                                              value:nil] build]];
+                     }];
 }
 
 - (void)showGallery:(NSString *)uri
@@ -416,7 +432,13 @@ static NSString * const kFrameString = @"frame";
         });
         
     };
-    [self presentMHGalleryController:gallery animated:YES completion:nil];
+    [self presentMHGalleryController:gallery animated:YES
+                          completion:^() {
+                              [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"
+                                                                                                                  action:@"button_tap"
+                                                                                                                   label:@"gallery"
+                                                                                                                   value:nil] build]];
+                          }];
 }
 
 - (void)viewCommentAction
@@ -424,6 +446,11 @@ static NSString * const kFrameString = @"frame";
     CBPCommentsViewController *vc = [[CBPCommentsViewController alloc] initWithPost:self.post];
     
     [self.navigationController pushViewController:vc animated:YES];
+    
+    [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"
+                                                                                        action:@"button_tap"
+                                                                                         label:@"view_comments"
+                                                                                         value:nil] build]];
 }
 
 #pragma mark -
@@ -547,6 +574,11 @@ static NSString * const kFrameString = @"frame";
             [self.dataSource replacePost:self.post];
         }
     }
+    
+    id tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName
+           value:[NSString stringWithFormat:@"Post %@ %d", self.post.titlePlain, self.post.postId]];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 }
 
 #pragma mark - UIPinchGestureRecognizer

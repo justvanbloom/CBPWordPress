@@ -87,6 +87,8 @@
 {
     [super viewWillAppear:animated];
     
+    self.screenName = @"Post List Screen";
+    
     if (self.postCount < [self.dataSource.posts count]) {
         [self.tableView reloadData];
     }

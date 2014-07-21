@@ -7,6 +7,7 @@
 //
 
 #import <Crashlytics/Crashlytics.h>
+#import "GAI.h"
 #import <GooglePlus/GooglePlus.h>
 
 #import "BSConstants.h"
@@ -46,6 +47,11 @@
     [GPPSignIn sharedInstance].clientID = BSGooglePlusKey;
     
     [Crashlytics startWithAPIKey:BSCrashlyticsKey];
+#if TARGET_IPHONE_SIMULATOR
+    [[GAI sharedInstance] setDryRun:YES];
+    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
+#endif
+    [[GAI sharedInstance] trackerWithTrackingId:BSGoogleAnalyticsKey];
     
     return YES;
 }
