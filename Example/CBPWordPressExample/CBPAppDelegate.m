@@ -41,9 +41,9 @@
                                                              diskPath:nil];
     [NSURLCache setSharedURLCache:URLCache];
 
-    [GPPSignIn sharedInstance].clientID = @"864709573863-rr1na3aqu5embrr4fc15dkp5i8g7fmdm.apps.googleusercontent.com";
-    
     [self firstTime:application];
+    
+    [GPPSignIn sharedInstance].clientID = BSGooglePlusKey;
     
     [Crashlytics startWithAPIKey:BSCrashlyticsKey];
     
