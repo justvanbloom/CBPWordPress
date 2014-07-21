@@ -6,8 +6,10 @@
 //  Copyright (c) 2014 Crayons and Brown Paper. All rights reserved.
 //
 
+#import <Crashlytics/Crashlytics.h>
 #import <GooglePlus/GooglePlus.h>
 
+#import "BSConstants.h"
 #import "CBPAppDelegate.h"
 
 #import "CBPHomeViewController.h"
@@ -42,6 +44,8 @@
     [GPPSignIn sharedInstance].clientID = @"864709573863-rr1na3aqu5embrr4fc15dkp5i8g7fmdm.apps.googleusercontent.com";
     
     [self firstTime:application];
+    
+    [Crashlytics startWithAPIKey:BSCrashlyticsKey];
     
     return YES;
 }

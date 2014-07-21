@@ -11,6 +11,7 @@
 		341C803319522B4D00070FD4 /* CBPTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 341C803219522B4D00070FD4 /* CBPTableViewController.m */; };
 		341C8037195238E900070FD4 /* tag.snippet.html in Resources */ = {isa = PBXBuildFile; fileRef = 341C8036195238E900070FD4 /* tag.snippet.html */; };
 		341C803919523B8D00070FD4 /* category.snippet.html in Resources */ = {isa = PBXBuildFile; fileRef = 341C803819523B8D00070FD4 /* category.snippet.html */; };
+		34446FE7197D9DC500166229 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34446FE6197D9DC500166229 /* Crashlytics.framework */; };
 		347E285F190849B2004D3842 /* CBPCommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 347E285E190849B2004D3842 /* CBPCommentsViewController.m */; };
 		347E286219084AA1004D3842 /* CBPComposeCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 347E286119084AA1004D3842 /* CBPComposeCommentViewController.m */; };
 		349BC6D61975E236008CA989 /* UIViewController+CBPWordPressExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 349BC6D51975E236008CA989 /* UIViewController+CBPWordPressExample.m */; };
@@ -65,6 +66,8 @@
 		341C803219522B4D00070FD4 /* CBPTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBPTableViewController.m; sourceTree = "<group>"; };
 		341C8036195238E900070FD4 /* tag.snippet.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = tag.snippet.html; sourceTree = "<group>"; };
 		341C803819523B8D00070FD4 /* category.snippet.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = category.snippet.html; sourceTree = "<group>"; };
+		34446FE6197D9DC500166229 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		34446FE8197DA3F700166229 /* BSConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BSConstants.h; sourceTree = "<group>"; };
 		347E285D190849B2004D3842 /* CBPCommentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBPCommentsViewController.h; sourceTree = "<group>"; };
 		347E285E190849B2004D3842 /* CBPCommentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBPCommentsViewController.m; sourceTree = "<group>"; };
 		347E286019084AA1004D3842 /* CBPComposeCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBPComposeCommentViewController.h; sourceTree = "<group>"; };
@@ -135,6 +138,7 @@
 				34D3693C18E709AF00E14526 /* CoreGraphics.framework in Frameworks */,
 				34D3693E18E709AF00E14526 /* UIKit.framework in Frameworks */,
 				34D3693A18E709AF00E14526 /* Foundation.framework in Frameworks */,
+				34446FE7197D9DC500166229 /* Crashlytics.framework in Frameworks */,
 				C67A29DDF4CD4FD1B3280908 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -220,11 +224,12 @@
 			isa = PBXGroup;
 			children = (
 				34E31C5A1953727E00604A39 /* AVFoundation.framework */,
-				34D3693918E709AF00E14526 /* Foundation.framework */,
 				34D3693B18E709AF00E14526 /* CoreGraphics.framework */,
+				34446FE6197D9DC500166229 /* Crashlytics.framework */,
+				34D3693918E709AF00E14526 /* Foundation.framework */,
+				5D58735488124103BBB09705 /* libPods.a */,
 				34D3693D18E709AF00E14526 /* UIKit.framework */,
 				34D3695818E709AF00E14526 /* XCTest.framework */,
-				5D58735488124103BBB09705 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -254,6 +259,7 @@
 				34D3694518E709AF00E14526 /* main.m */,
 				34D3694718E709AF00E14526 /* CBPWordPressExample-Prefix.pch */,
 				34BC742F195A191500C162E8 /* CBPConstants.h */,
+				34446FE8197DA3F700166229 /* BSConstants.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -356,6 +362,7 @@
 				34D3693318E709AF00E14526 /* Frameworks */,
 				34D3693418E709AF00E14526 /* Resources */,
 				9F29664206684FBFAD1F908C /* Copy Pods Resources */,
+				34446FE5197D9DA600166229 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -453,6 +460,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		34446FE5197D9DA600166229 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Crashlytics.framework/run 1b5e41ad9a5dcccd4e157158af5242bfdc7fe671 437207a35b978ada4fcb475712f8d26d042228fa66821e5ab9213f498e6ec0ec";
+		};
 		9F29664206684FBFAD1F908C /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -630,7 +650,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CBPWordPressExample/CBPWordPressExample-Prefix.pch";
 				INFOPLIST_FILE = "CBPWordPressExample/CBPWordPressExample-Info.plist";
@@ -649,7 +672,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CBPWordPressExample/CBPWordPressExample-Prefix.pch";
 				INFOPLIST_FILE = "CBPWordPressExample/CBPWordPressExample-Info.plist";

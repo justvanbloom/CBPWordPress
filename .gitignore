@@ -21,3 +21,5 @@ DerivedData
 Example/Pods
 
 *.swp
+
+Example/CBPWordPressExample/BSConstants.h
