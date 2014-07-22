@@ -55,8 +55,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    self.screenName = @"Home Screen";
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeInfoLight];
     
@@ -207,6 +205,15 @@
     return params;
 }
 
+- (NSString *)generateScreenName
+{
+    if ([self.searchBar.text length]) {
+        return [NSString stringWithFormat:@"Search %@ Page %ld", self.searchBar.text, (long)self.dataSource.page];
+    }
+    
+    return [super generateScreenName];
+}
+
 - (void)load:(BOOL)more
 {
     if (!more) {
@@ -245,7 +252,7 @@
         self.navigationItem.titleView = self.titleImageView;
     }
     
-    if (lastHeaderUpdate && [lastHeaderUpdate timeIntervalSinceNow] < 84600) {
+    if (lastHeaderUpdate && (fabsf([lastHeaderUpdate timeIntervalSinceNow]) < 21600)) {
         return;
     }
     

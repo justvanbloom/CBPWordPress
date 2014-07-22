@@ -575,7 +575,7 @@ static NSString * const kFrameString = @"frame";
     
     id tracker = [[GAI sharedInstance] defaultTracker];
     [tracker set:kGAIScreenName
-           value:[NSString stringWithFormat:@"Post %@ %d", self.post.titlePlain, self.post.postId]];
+           value:[NSString stringWithFormat:@"Post %@ %ld", self.post.titlePlain, (long)self.post.postId]];
     [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 }
 

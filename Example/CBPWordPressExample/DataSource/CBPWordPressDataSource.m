@@ -14,7 +14,7 @@
 
 @interface CBPWordPressDataSource()
 @property (nonatomic, assign, readwrite) NSInteger lastFetchedPostIndex;
-@property (nonatomic) NSInteger page;
+@property (nonatomic, assign, readwrite) NSInteger page;
 @property (nonatomic) NSMutableDictionary *postIdList;
 @property (nonatomic, readwrite) NSArray *posts;
 @end

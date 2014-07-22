@@ -20,4 +20,5 @@
 - (instancetype)initWithTagId:(NSNumber *)tagId;
 
 - (NSDictionary *)generateParams;
+- (NSString *)generateScreenName;
 @end

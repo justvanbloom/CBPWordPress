@@ -10,6 +10,7 @@
 
 @interface CBPWordPressDataSource : NSObject <UITableViewDataSource>
 @property (nonatomic, assign, readonly) NSInteger lastFetchedPostIndex;
+@property (nonatomic, assign, readonly) NSInteger page;
 @property (nonatomic, readonly) NSArray *posts;
 
 - (void)addPost:(CBPWordPressPost *)post;

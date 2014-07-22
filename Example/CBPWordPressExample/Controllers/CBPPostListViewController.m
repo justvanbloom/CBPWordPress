@@ -6,6 +6,9 @@
 //  Copyright (c) 2014 Crayons and Brown Paper. All rights reserved.
 //
 
+#import "GAI.h"
+#import "GAIFields.h"
+#import "GAIDictionaryBuilder.h"
 #import "NSString+HTML.h"
 
 #import "CBPPostListViewController.h"
@@ -87,8 +90,6 @@
 {
     [super viewWillAppear:animated];
     
-    self.screenName = @"Post List Screen";
-    
     if (self.postCount < [self.dataSource.posts count]) {
         [self.tableView reloadData];
     }
@@ -126,6 +127,11 @@
     [self stopLoading:more];
 }
 
+- (NSString *)generateScreenName
+{
+    return [NSString stringWithFormat:@"Post List Page %ld", (long)self.dataSource.page];
+}
+
 - (void)load:(BOOL)more
 {
     [super load:more];
@@ -143,6 +149,16 @@
             [strongSelf errorLoading:error wasLoadingMore:more];
         }
     }];
+}
+
+- (void)stopLoading:(BOOL)more
+{
+    [super stopLoading:more];
+    
+    id tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName
+           value:[self generateScreenName]];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 }
 
 #pragma mark - UITableViewDelegate
