@@ -7,7 +7,7 @@
 //
 
 #import <AVFoundation/AVFoundation.h>
-
+#import "DFPBannerView.h"
 #import "NSString+CBPWordPressExample.h"
 #import "NSString+HTML.h"
 
@@ -34,9 +34,12 @@ static const CGFloat CBPLoadPostViewMultiplier = 1.5;
 static NSString * const kContentOffsetString = @"contentOffset";
 static NSString * const kFrameString = @"frame";
 
-@interface CBPPostViewController () <UIScrollViewDelegate, UIWebViewDelegate>
+@interface CBPPostViewController () <GADBannerViewDelegate, UIScrollViewDelegate, UIWebViewDelegate>
 @property (nonatomic, assign) CGFloat baseFontSize;
+@property (nonatomic) UIView *containerView;
 @property (nonatomic, weak) CBPWordPressDataSource *dataSource;
+@property (nonatomic) DFPBannerView *dfpBannerView;
+@property (nonatomic) NSLayoutConstraint *dfpBannerViewHeightConstraint;
 @property (nonatomic) NSInteger index;
 @property (nonatomic) UIBarButtonItem *nextPostButton;
 @property (nonatomic) UILabel * nextTitleLabel;
@@ -112,36 +115,34 @@ static NSString * const kFrameString = @"frame";
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    [self.view addSubview:self.nextView];
+    [self.view addSubview:self.containerView];
     
-    [self.view addSubview:self.previousView];
+    [self.view addSubview:self.dfpBannerView];
     
-    [self.view addSubview:self.webView];
+    NSDictionary *views = @{@"dfpBannerView": self.dfpBannerView,
+                            @"containerView": self.containerView};
     
-    NSDictionary *views = @{@"nextView": self.nextView,
-                            @"previousView": self.previousView};
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.nextView
-                                                          attribute:NSLayoutAttributeHeight
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:nil
-                                                          attribute:NSLayoutAttributeNotAnAttribute
-                                                         multiplier:1.0f
-                                                           constant:CBPLoadPostViewHeight]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[nextView]|"
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[dfpBannerView][containerView]|"
                                                                       options:0
                                                                       metrics:nil
                                                                         views:views]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.previousView
-                                                          attribute:NSLayoutAttributeHeight
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:nil
-                                                          attribute:NSLayoutAttributeNotAnAttribute
-                                                         multiplier:1.0f
-                                                           constant:CBPLoadPostViewHeight]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[previousView]|"
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[dfpBannerView]|"
                                                                       options:0
                                                                       metrics:nil
                                                                         views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[containerView]|"
+                                                                      options:0
+                                                                      metrics:nil
+                                                                        views:views]];
+    self.dfpBannerViewHeightConstraint = [NSLayoutConstraint constraintWithItem:self.dfpBannerView
+                                                                      attribute:NSLayoutAttributeHeight
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:nil
+                                                                      attribute:NSLayoutAttributeNotAnAttribute
+                                                                     multiplier:1.0f
+                                                                       constant:50.0f];
+    [self.view addConstraint:self.dfpBannerViewHeightConstraint];
+    
     self.scrollView = self.webView.scrollView;
     self.scrollView.delegate = self;
 }
@@ -474,6 +475,29 @@ static NSString * const kFrameString = @"frame";
     return NO;
 }
 
+#pragma mark - GADBannerViewDelegate
+- (void)adViewDidReceiveAd:(GADBannerView *)view;
+{
+    self.dfpBannerViewHeightConstraint.constant = 50.0f;
+    
+    [UIView animateWithDuration:0.3f
+                     animations:^() {
+                         [self.view layoutIfNeeded];
+                     }];
+}
+
+- (void)adView:(GADBannerView *)view didFailToReceiveAdWithError:(GADRequestError *)error
+{
+    NSLog(@"error: %@", error);
+    
+    self.dfpBannerViewHeightConstraint.constant = 0;
+    
+    [UIView animateWithDuration:0.3f
+                     animations:^() {
+                         [self.view layoutIfNeeded];
+                     }];
+}
+
 #pragma mark - UIWebViewDelegate
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
@@ -604,8 +628,8 @@ static NSString * const kFrameString = @"frame";
 
 #pragma mark - Observers
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    CGFloat frameWidth = CGRectGetWidth(self.view.frame);
-    CGFloat frameHeight = CGRectGetHeight(self.view.frame);
+    CGFloat frameWidth = CGRectGetWidth(self.containerView.frame);
+    CGFloat frameHeight = CGRectGetHeight(self.containerView.frame);
     
     if ([keyPath isEqualToString:kContentOffsetString])
     {
@@ -628,7 +652,7 @@ static NSString * const kFrameString = @"frame";
         }
         else if (frameHeight > (self.scrollView.contentSize.height - self.scrollView.contentOffset.y))
         {
-            CGFloat top = (frameHeight - (self.view.frame.size.height - (self.scrollView.contentSize.height - self.scrollView.contentOffset.y)));
+            CGFloat top = (frameHeight - (self.containerView.frame.size.height - (self.scrollView.contentSize.height - self.scrollView.contentOffset.y)));
             if (top < (frameHeight - CBPLoadPostViewHeight)) {
                 top = (frameHeight - CBPLoadPostViewHeight);
             }
@@ -639,7 +663,7 @@ static NSString * const kFrameString = @"frame";
     else if ([keyPath isEqualToString:kFrameString])
     {
         self.nextView.frame = CGRectMake(0, -CBPLoadPostViewHeight, frameWidth, CBPLoadPostViewHeight);
-        self.previousView.frame = CGRectMake(0, self.view.frame.size.height, frameWidth, CBPLoadPostViewHeight);
+        self.previousView.frame = CGRectMake(0, self.containerView.frame.size.height, frameWidth, CBPLoadPostViewHeight);
     }
 }
 
@@ -650,17 +674,85 @@ static NSString * const kFrameString = @"frame";
     {
         [self loadNextAction];
     }
-    else if ((CGRectGetHeight(self.view.frame) - self.previousView.frame.origin.y) >= CBPLoadPostViewHeight)
+    else if ((CGRectGetHeight(self.containerView.frame) - self.previousView.frame.origin.y) >= CBPLoadPostViewHeight)
     {
         [self loadPreviousAction];
     }
 }
 
 #pragma mark -
+- (UIView *)containerView
+{
+    if (!_containerView) {
+        _containerView = [UIView new];
+        _containerView.translatesAutoresizingMaskIntoConstraints = NO;
+        
+        [_containerView addSubview:self.nextView];
+        
+        [_containerView addSubview:self.previousView];
+        
+        [_containerView addSubview:self.webView];
+        
+        NSDictionary *views = @{@"nextView": self.nextView,
+                                @"webView": self.webView,
+                                @"previousView": self.previousView};
+        [_containerView addConstraint:[NSLayoutConstraint constraintWithItem:self.nextView
+                                                                   attribute:NSLayoutAttributeHeight
+                                                                   relatedBy:NSLayoutRelationEqual
+                                                                      toItem:nil
+                                                                   attribute:NSLayoutAttributeNotAnAttribute
+                                                                  multiplier:1.0f
+                                                                    constant:CBPLoadPostViewHeight]];
+        [_containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[nextView]|"
+                                                                               options:0
+                                                                               metrics:nil
+                                                                                 views:views]];
+        [_containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[webView]|"
+                                                                               options:0
+                                                                               metrics:nil
+                                                                                 views:views]];
+        [_containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[webView]|"
+                                                                               options:0
+                                                                               metrics:nil
+                                                                                 views:views]];
+        [_containerView addConstraint:[NSLayoutConstraint constraintWithItem:self.previousView
+                                                                   attribute:NSLayoutAttributeHeight
+                                                                   relatedBy:NSLayoutRelationEqual
+                                                                      toItem:nil
+                                                                   attribute:NSLayoutAttributeNotAnAttribute
+                                                                  multiplier:1.0f
+                                                                    constant:CBPLoadPostViewHeight]];
+        [_containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[previousView]|"
+                                                                               options:0
+                                                                               metrics:nil
+                                                                                 views:views]];
+    }
+    
+    return _containerView;
+}
+
+- (DFPBannerView *)dfpBannerView
+{
+    if (!_dfpBannerView) {
+        _dfpBannerView = [[DFPBannerView alloc] initWithAdSize:kGADAdSizeBanner];
+        _dfpBannerView.translatesAutoresizingMaskIntoConstraints = NO;
+        _dfpBannerView.delegate = self;
+        _dfpBannerView.adUnitID = @"/20132202/ios-app-ad";
+        _dfpBannerView.rootViewController = self;
+        GADRequest *request =[GADRequest request];
+#if TARGET_IPHONE_SIMULATOR
+        request.testDevices = @[ @"Simulator" ];
+#endif
+        [_dfpBannerView loadRequest:request];
+    }
+    
+    return _dfpBannerView;
+}
+
 - (UILabel *)nextTitleLabel
 {
     if (!_nextTitleLabel) {
-        _nextTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(CBPLoadPostViewPadding, 0, CGRectGetWidth(self.view.frame) - (CBPLoadPostViewPadding * 2), CBPLoadPostViewHeight)];
+        _nextTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(CBPLoadPostViewPadding, 0, CGRectGetWidth(self.containerView.frame) - (CBPLoadPostViewPadding * 2), CBPLoadPostViewHeight)];
         _nextTitleLabel.translatesAutoresizingMaskIntoConstraints = NO;
         _nextTitleLabel.backgroundColor = [UIColor clearColor];
         _nextTitleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
@@ -674,7 +766,7 @@ static NSString * const kFrameString = @"frame";
 - (UIView *)nextView
 {
     if (!_nextView) {
-        _nextView = [[UIView alloc] initWithFrame:CGRectMake(0, -CBPLoadPostViewHeight, CGRectGetWidth(self.view.frame), CBPLoadPostViewHeight)];
+        _nextView = [[UIView alloc] initWithFrame:CGRectMake(0, -CBPLoadPostViewHeight, CGRectGetWidth(self.containerView.frame), CBPLoadPostViewHeight)];
         _nextView.translatesAutoresizingMaskIntoConstraints = NO;
         _nextView.backgroundColor = [UIColor colorWithRed:0.964f green:0.964f blue:0.964f alpha:1.0f];
         
@@ -784,7 +876,7 @@ static NSString * const kFrameString = @"frame";
         }
         
         _webView = [[UIWebView alloc] initWithFrame:self.view.frame];
-        _webView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+        _webView.translatesAutoresizingMaskIntoConstraints = NO;
         _webView.backgroundColor = [UIColor clearColor];
         _webView.allowsInlineMediaPlayback = YES;
         _webView.mediaPlaybackRequiresUserAction = YES;

@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Crayons and Brown Paper. All rights reserved.
 //
 
+#import "DFPInterstitial.h"
+#import "GADInterstitialDelegate.h"
 #import <SVPullToRefresh/SVPullToRefresh.h>
 #import "UIImageView+AFNetworking.h"
 
@@ -15,13 +17,15 @@
 #import "CBPPostViewController.h"
 #import "CBPSubmitTipViewController.h"
 
-@interface CBPHomeViewController () <UISearchBarDelegate>
+@interface CBPHomeViewController () <GADInterstitialDelegate, UISearchBarDelegate>
+@property (nonatomic) GADInterstitial *dfpInterstitial;
 @property (nonatomic) UISearchBar *searchBar;
 @property (nonatomic) UILabel *searchDetailLabel;
 @property (nonatomic) UIView *searchDetailView;
 @property (nonatomic) NSLayoutConstraint *searchDetailViewHeightConstraint;
 @property (nonatomic, assign) BOOL syncCellPosition;
 @property (nonatomic) UIImageView *titleImageView;
+@property (nonatomic) BOOL showInterstitial;
 @end
 
 @implementation CBPHomeViewController
@@ -77,9 +81,11 @@
     self.tableView.contentOffset = CGPointMake(0, CGRectGetHeight(self.searchBar.frame));
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updatePosts)
+                                             selector:@selector(onEnterForeground)
                                                  name:UIApplicationWillEnterForegroundNotification
                                                object:nil];
+    
+    [self.dfpInterstitial loadRequest:[GADRequest request]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -279,8 +285,14 @@
                                         }];
 }
 
-- (void)updatePosts
+- (void)onEnterForeground
 {
+    if (self.showInterstitial) {
+        [self.dfpInterstitial presentFromRootViewController:self];
+        
+        self.showInterstitial = NO;
+    }
+    
     if ([[NSUserDefaults standardUserDefaults] boolForKey:CBPBackgroundUpdate]) {
         return;
     }
@@ -301,6 +313,26 @@
     [UIView animateWithDuration:0.3f animations:^(void) {
         [self.view layoutIfNeeded];
     }];
+}
+
+#pragma mark - GADInterstitialDelegate
+- (void)interstitialDidReceiveAd:(DFPInterstitial *)ad
+{
+    NSLog(@"Received ad successfully");
+    
+    self.showInterstitial = YES;
+}
+
+- (void)interstitial:(DFPInterstitial *)ad didFailToReceiveAdWithError:(GADRequestError *)error
+{
+    NSLog(@"Failed to receive ad with error: %@", [error localizedFailureReason]);
+}
+
+- (void)interstitialDidDismissScreen:(DFPInterstitial *)interstitial
+{
+    self.dfpInterstitial = nil;
+    
+    [self.dfpInterstitial loadRequest:[GADRequest request]];
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -347,6 +379,17 @@
 }
 
 #pragma mark -
+- (GADInterstitial *)dfpInterstitial
+{
+    if (!_dfpInterstitial) {
+        _dfpInterstitial = [GADInterstitial new];
+        _dfpInterstitial.delegate = self;
+        _dfpInterstitial.adUnitID = @"/6253334/dfp_example_ad/interstitial";
+    }
+    
+    return _dfpInterstitial;
+}
+
 - (UISearchBar *)searchBar
 {
     if (!_searchBar) {

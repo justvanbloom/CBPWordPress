@@ -6,11 +6,15 @@
 //  Copyright (c) 2014 Crayons and Brown Paper. All rights reserved.
 //
 
+#import "DFPBannerView.h"
 #import <SVPullToRefresh/SVPullToRefresh.h>
 
 #import "CBPTableViewController.h"
 
-@interface CBPTableViewController ()
+@interface CBPTableViewController () <GADBannerViewDelegate>
+@property (nonatomic) UIView *containerView;
+@property (nonatomic) DFPBannerView *dfpBannerView;
+@property (nonatomic) NSLayoutConstraint *dfpBannerViewHeightConstraint;
 @property (nonatomic) UILabel *errorLabel;
 @property (nonatomic) UIView *errorView;
 @property (nonatomic) UIView *loadingView;
@@ -25,68 +29,33 @@
     
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
-    [self.view addSubview:self.errorView];
+    [self.view addSubview:self.containerView];
     
-    [self.view addSubview:self.loadingView];
+    [self.view addSubview:self.dfpBannerView];
     
-    [self.view addSubview:self.tableView];
+    NSDictionary *views = @{@"dfpBannerView": self.dfpBannerView,
+                            @"containerView": self.containerView};
     
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.errorView
-                                                          attribute:NSLayoutAttributeHeight
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.view
-                                                          attribute:NSLayoutAttributeHeight
-                                                         multiplier:1.0f
-                                                           constant:0]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.errorView
-                                                          attribute:NSLayoutAttributeWidth
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.view
-                                                          attribute:NSLayoutAttributeWidth
-                                                         multiplier:1.0f
-                                                           constant:0]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.errorView
-                                                          attribute:NSLayoutAttributeCenterX
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.view
-                                                          attribute:NSLayoutAttributeCenterX
-                                                         multiplier:1.0f
-                                                           constant:0]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.errorView
-                                                          attribute:NSLayoutAttributeCenterY
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.view
-                                                          attribute:NSLayoutAttributeCenterY
-                                                         multiplier:1.0f
-                                                           constant:0]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.loadingView
-                                                          attribute:NSLayoutAttributeHeight
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.view
-                                                          attribute:NSLayoutAttributeHeight
-                                                         multiplier:1.0f
-                                                           constant:0]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.loadingView
-                                                          attribute:NSLayoutAttributeWidth
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.view
-                                                          attribute:NSLayoutAttributeWidth
-                                                         multiplier:1.0f
-                                                           constant:0]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.loadingView
-                                                          attribute:NSLayoutAttributeCenterX
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.view
-                                                          attribute:NSLayoutAttributeCenterX
-                                                         multiplier:1.0f
-                                                           constant:0]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.loadingView
-                                                          attribute:NSLayoutAttributeCenterY
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.view
-                                                          attribute:NSLayoutAttributeCenterY
-                                                         multiplier:1.0f
-                                                           constant:0]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[dfpBannerView][containerView]|"
+                                                                      options:0
+                                                                      metrics:nil
+                                                                        views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[dfpBannerView]|"
+                                                                      options:0
+                                                                      metrics:nil
+                                                                        views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[containerView]|"
+                                                                      options:0
+                                                                      metrics:nil
+                                                                        views:views]];
+    self.dfpBannerViewHeightConstraint = [NSLayoutConstraint constraintWithItem:self.dfpBannerView
+                                                                      attribute:NSLayoutAttributeHeight
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:nil
+                                                                      attribute:NSLayoutAttributeNotAnAttribute
+                                                                     multiplier:1.0f
+                                                                       constant:50.0f];
+    [self.view addConstraint:self.dfpBannerViewHeightConstraint];
 }
 
 - (void)viewDidLoad
@@ -145,7 +114,7 @@
     [self.errorLabel sizeToFit];
     self.errorLabel.center = self.errorView.center;
     
-    [self.view bringSubviewToFront:self.errorView];
+    [self.containerView bringSubviewToFront:self.errorView];
     
     [self stopLoading:NO];
 }
@@ -164,15 +133,15 @@
 
 - (void)startLoading
 {
-    [self.view bringSubviewToFront:self.loadingView];
-    [self.view sendSubviewToBack:self.errorView];
+    [self.containerView bringSubviewToFront:self.loadingView];
+    [self.containerView sendSubviewToBack:self.errorView];
     
     self.errorLabel.text = nil;
 }
 
 - (void)stopLoading:(BOOL)more
 {
-    [self.view sendSubviewToBack:self.loadingView];
+    [self.containerView sendSubviewToBack:self.loadingView];
     
     if (more) {
         [self.tableView.infiniteScrollingView stopAnimating];
@@ -181,7 +150,133 @@
     }
 }
 
+#pragma mark - GADBannerViewDelegate
+- (void)adViewDidReceiveAd:(GADBannerView *)view;
+{
+    self.dfpBannerViewHeightConstraint.constant = 50.0f;
+    
+    [UIView animateWithDuration:0.3f
+                     animations:^() {
+                         [self.view layoutIfNeeded];
+                     }];
+}
+
+- (void)adView:(GADBannerView *)view didFailToReceiveAdWithError:(GADRequestError *)error
+{
+    NSLog(@"error: %@", error);
+    
+    self.dfpBannerViewHeightConstraint.constant = 0;
+    
+    [UIView animateWithDuration:0.3f
+                     animations:^() {
+                         [self.view layoutIfNeeded];
+                     }];
+}
+
 #pragma mark -
+- (UIView *)containerView
+{
+    if (!_containerView) {
+        _containerView = [UIView new];
+        _containerView.translatesAutoresizingMaskIntoConstraints = NO;
+        
+        [_containerView addSubview:self.errorView];
+        
+        [_containerView addSubview:self.loadingView];
+        
+        [_containerView addSubview:self.tableView];
+        
+        NSDictionary *views = @{@"errorView": self.errorView,
+                                @"loadingView": self.loadingView,
+                                @"tableView": self.tableView,};
+        
+        [_containerView addConstraint:[NSLayoutConstraint constraintWithItem:self.errorView
+                                                                   attribute:NSLayoutAttributeHeight
+                                                                   relatedBy:NSLayoutRelationEqual
+                                                                      toItem:_containerView
+                                                                   attribute:NSLayoutAttributeHeight
+                                                                  multiplier:1.0f
+                                                                    constant:0]];
+        [_containerView addConstraint:[NSLayoutConstraint constraintWithItem:self.errorView
+                                                                   attribute:NSLayoutAttributeWidth
+                                                                   relatedBy:NSLayoutRelationEqual
+                                                                      toItem:_containerView
+                                                                   attribute:NSLayoutAttributeWidth
+                                                                  multiplier:1.0f
+                                                                    constant:0]];
+        [_containerView addConstraint:[NSLayoutConstraint constraintWithItem:self.errorView
+                                                                   attribute:NSLayoutAttributeCenterX
+                                                                   relatedBy:NSLayoutRelationEqual
+                                                                      toItem:_containerView
+                                                                   attribute:NSLayoutAttributeCenterX
+                                                                  multiplier:1.0f
+                                                                    constant:0]];
+        [_containerView addConstraint:[NSLayoutConstraint constraintWithItem:self.errorView
+                                                                   attribute:NSLayoutAttributeCenterY
+                                                                   relatedBy:NSLayoutRelationEqual
+                                                                      toItem:_containerView
+                                                                   attribute:NSLayoutAttributeCenterY
+                                                                  multiplier:1.0f
+                                                                    constant:0]];
+        [_containerView addConstraint:[NSLayoutConstraint constraintWithItem:self.loadingView
+                                                                   attribute:NSLayoutAttributeHeight
+                                                                   relatedBy:NSLayoutRelationEqual
+                                                                      toItem:_containerView
+                                                                   attribute:NSLayoutAttributeHeight
+                                                                  multiplier:1.0f
+                                                                    constant:0]];
+        [_containerView addConstraint:[NSLayoutConstraint constraintWithItem:self.loadingView
+                                                                   attribute:NSLayoutAttributeWidth
+                                                                   relatedBy:NSLayoutRelationEqual
+                                                                      toItem:_containerView
+                                                                   attribute:NSLayoutAttributeWidth
+                                                                  multiplier:1.0f
+                                                                    constant:0]];
+        [_containerView addConstraint:[NSLayoutConstraint constraintWithItem:self.loadingView
+                                                                   attribute:NSLayoutAttributeCenterX
+                                                                   relatedBy:NSLayoutRelationEqual
+                                                                      toItem:_containerView
+                                                                   attribute:NSLayoutAttributeCenterX
+                                                                  multiplier:1.0f
+                                                                    constant:0]];
+        [_containerView addConstraint:[NSLayoutConstraint constraintWithItem:self.loadingView
+                                                                   attribute:NSLayoutAttributeCenterY
+                                                                   relatedBy:NSLayoutRelationEqual
+                                                                      toItem:_containerView
+                                                                   attribute:NSLayoutAttributeCenterY
+                                                                  multiplier:1.0f
+                                                                    constant:0]];
+        [_containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[tableView]|"
+                                                                               options:0
+                                                                               metrics:nil
+                                                                                 views:views]];
+        [_containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[tableView]|"
+                                                                               options:0
+                                                                               metrics:nil
+                                                                                 views:views]];
+    }
+    
+    return _containerView;
+}
+
+- (DFPBannerView *)dfpBannerView
+{
+    if (!_dfpBannerView) {
+        _dfpBannerView = [[DFPBannerView alloc] initWithAdSize:kGADAdSizeBanner];
+        _dfpBannerView.translatesAutoresizingMaskIntoConstraints = NO;
+        _dfpBannerView.delegate = self;
+        _dfpBannerView.adUnitID = @"/20132202/ios-app-ad";
+        _dfpBannerView.rootViewController = self;
+        GADRequest *request =[GADRequest request];
+#if TARGET_IPHONE_SIMULATOR
+        request.testDevices = @[ @"Simulator" ];
+#endif
+        [_dfpBannerView loadRequest:request];
+    }
+    
+    return _dfpBannerView;
+}
+
 - (UILabel *)errorLabel
 {
     if (!_errorLabel) {
@@ -278,6 +373,7 @@
 {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
+        _tableView.translatesAutoresizingMaskIntoConstraints = NO;
         _tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         _tableView.delegate = self;
     }
