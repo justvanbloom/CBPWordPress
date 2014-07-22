@@ -27,7 +27,7 @@
 
 #import "CBPWordPressDataSource.h"
 
-static const CGFloat CBPLoadPostViewHeight = 50.0;
+static const CGFloat CBPLoadPostViewHeight = 75.0;
 static const CGFloat CBPLoadPostViewPadding = 10.0;
 static const CGFloat CBPLoadPostViewMultiplier = 1.5;
 
@@ -137,7 +137,7 @@ static NSString * const kFrameString = @"frame";
                                                              toItem:nil
                                                           attribute:NSLayoutAttributeNotAnAttribute
                                                          multiplier:1.0f
-                                                           constant:CBPLoadPostViewHeight * CBPLoadPostViewMultiplier]];
+                                                           constant:CBPLoadPostViewHeight]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[previousView]|"
                                                                       options:0
                                                                       metrics:nil
@@ -295,7 +295,7 @@ static NSString * const kFrameString = @"frame";
             [self displayPost];
         } else if (self.post.previousURL) {
             // Update the content inset
-            self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, (CBPLoadPostViewHeight * CBPLoadPostViewMultiplier), 0);
+            self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, CBPLoadPostViewHeight, 0);
             
             self.url = [NSURL URLWithString:self.post.previousURL];
             
@@ -612,7 +612,7 @@ static NSString * const kFrameString = @"frame";
         if (self.scrollView.contentOffset.y == 0)
         {
             self.nextView.frame = CGRectMake(0, -CBPLoadPostViewHeight, frameWidth, CBPLoadPostViewHeight);
-            self.previousView.frame = CGRectMake(0, frameHeight, frameWidth, CBPLoadPostViewHeight * CBPLoadPostViewMultiplier);
+            self.previousView.frame = CGRectMake(0, frameHeight, frameWidth, CBPLoadPostViewHeight);
             return;
         }
         
@@ -620,16 +620,20 @@ static NSString * const kFrameString = @"frame";
         {
             CGFloat offset = self.scrollView.contentOffset.y;
             
-            if (offset < -CBPLoadPostViewHeight) offset = -CBPLoadPostViewHeight;
+            if (offset < -CBPLoadPostViewHeight) {
+                offset = -CBPLoadPostViewHeight;
+            }
             
             self.nextView.frame = CGRectMake(0, 0 - (CBPLoadPostViewHeight + offset), frameWidth, CBPLoadPostViewHeight);
         }
         else if (frameHeight > (self.scrollView.contentSize.height - self.scrollView.contentOffset.y))
         {
             CGFloat top = (frameHeight - (self.view.frame.size.height - (self.scrollView.contentSize.height - self.scrollView.contentOffset.y)));
-            if (top < (frameHeight - (CBPLoadPostViewHeight * CBPLoadPostViewMultiplier))) top = (frameHeight - (CBPLoadPostViewHeight * CBPLoadPostViewMultiplier));
+            if (top < (frameHeight - CBPLoadPostViewHeight)) {
+                top = (frameHeight - CBPLoadPostViewHeight);
+            }
             
-            self.previousView.frame = CGRectMake(0, top , frameWidth, CBPLoadPostViewHeight * CBPLoadPostViewMultiplier);
+            self.previousView.frame = CGRectMake(0, top , frameWidth, CBPLoadPostViewHeight);
         }
     }
     else if ([keyPath isEqualToString:kFrameString])
@@ -646,7 +650,7 @@ static NSString * const kFrameString = @"frame";
     {
         [self loadNextAction];
     }
-    else if ((CGRectGetHeight(self.view.frame) - self.previousView.frame.origin.y) >= (CBPLoadPostViewHeight * CBPLoadPostViewMultiplier))
+    else if ((CGRectGetHeight(self.view.frame) - self.previousView.frame.origin.y) >= CBPLoadPostViewHeight)
     {
         [self loadPreviousAction];
     }
@@ -683,6 +687,9 @@ static NSString * const kFrameString = @"frame";
         
         NSDictionary *views = @{@"nextTitleLabel": self.nextTitleLabel,
                                 @"bottomBlackLine": bottomBlackLine};
+        
+        NSDictionary *metrics = @{@"padding": @(CBPLoadPostViewPadding)};
+        
         [_nextView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[nextTitleLabel]|"
                                                                           options:0
                                                                           metrics:nil
@@ -691,9 +698,9 @@ static NSString * const kFrameString = @"frame";
                                                                           options:0
                                                                           metrics:nil
                                                                             views:views]];
-        [_nextView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"|-(%f)-[nextTitleLabel]-(%f)-|", CBPLoadPostViewPadding, CBPLoadPostViewPadding]
+        [_nextView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-(padding)-[nextTitleLabel]-(padding)-|"
                                                                           options:0
-                                                                          metrics:nil
+                                                                          metrics:metrics
                                                                             views:views]];
         [_nextView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[bottomBlackLine]|"
                                                                           options:0
@@ -723,7 +730,7 @@ static NSString * const kFrameString = @"frame";
 - (UIView *)previousView
 {
     if (!_previousView) {
-        _previousView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.frame), CGRectGetWidth(self.view.frame), CBPLoadPostViewHeight * CBPLoadPostViewMultiplier)];
+        _previousView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.frame), CGRectGetWidth(self.view.frame), CBPLoadPostViewHeight)];
         _previousView.translatesAutoresizingMaskIntoConstraints = NO;
         _previousView.backgroundColor = [UIColor colorWithRed:0.964f green:0.964f blue:0.964f alpha:1.0f];
         
@@ -736,6 +743,9 @@ static NSString * const kFrameString = @"frame";
         
         NSDictionary *views = @{@"previousTitleLabel": self.previousTitleLabel,
                                 @"topBlackLine": topBlackLine};
+        
+        NSDictionary *metrics = @{@"padding": @(CBPLoadPostViewPadding)};
+        
         [_previousView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[previousTitleLabel]|"
                                                                               options:0
                                                                               metrics:nil
@@ -744,9 +754,9 @@ static NSString * const kFrameString = @"frame";
                                                                               options:0
                                                                               metrics:nil
                                                                                 views:views]];
-        [_previousView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"|-(%f)-[previousTitleLabel]-(%f)-|", CBPLoadPostViewPadding, CBPLoadPostViewPadding]
+        [_previousView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-(padding)-[previousTitleLabel]-(padding)-|"
                                                                               options:0
-                                                                              metrics:nil
+                                                                              metrics:metrics
                                                                                 views:views]];
         [_previousView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[topBlackLine]|"
                                                                               options:0
