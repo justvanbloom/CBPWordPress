@@ -82,6 +82,8 @@
         [self.tableView addInfiniteScrollingWithActionHandler:^{
             [weakSelf load:YES];
         }];
+        
+        self.tableView.infiniteScrollingView.enabled = NO;
     }
     
     [self stopLoading:NO];
@@ -123,6 +125,8 @@
 {
     if (!more) {
         [self startLoading];
+        self.canLoadMore = NO;
+        self.tableView.infiniteScrollingView.enabled = self.canLoadMore;
     }
 }
 
@@ -148,6 +152,8 @@
     } else {
         [self.tableView.pullToRefreshView stopAnimating];
     }
+    
+    self.tableView.infiniteScrollingView.enabled = self.canLoadMore;
 }
 
 #pragma mark - GADBannerViewDelegate

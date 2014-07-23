@@ -144,6 +144,8 @@
         if (result) {
             [strongSelf.tableView reloadData];
             
+            strongSelf.canLoadMore = [strongSelf.dataSource canLoadMore];
+            
             [strongSelf stopLoading:more];
         } else {
             [strongSelf errorLoading:error wasLoadingMore:more];
