@@ -10,7 +10,6 @@
 #import "GAI.h"
 #import <GooglePlus/GooglePlus.h>
 
-#import "BSConstants.h"
 #import "CBPAppDelegate.h"
 
 #import "CBPHomeViewController.h"

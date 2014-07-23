@@ -488,8 +488,6 @@ static NSString * const kFrameString = @"frame";
 
 - (void)adView:(GADBannerView *)view didFailToReceiveAdWithError:(GADRequestError *)error
 {
-    NSLog(@"error: %@", error);
-    
     self.dfpBannerViewHeightConstraint.constant = 0;
     
     [UIView animateWithDuration:0.3f
@@ -736,8 +734,9 @@ static NSString * const kFrameString = @"frame";
     if (!_dfpBannerView) {
         _dfpBannerView = [[DFPBannerView alloc] initWithAdSize:kGADAdSizeBanner];
         _dfpBannerView.translatesAutoresizingMaskIntoConstraints = NO;
+        _dfpBannerView.backgroundColor = self.view.backgroundColor;
         _dfpBannerView.delegate = self;
-        _dfpBannerView.adUnitID = @"/20132202/ios-app-ad";
+        _dfpBannerView.adUnitID = BSPostAdUnit;
         _dfpBannerView.rootViewController = self;
         GADRequest *request =[GADRequest request];
 #if TARGET_IPHONE_SIMULATOR

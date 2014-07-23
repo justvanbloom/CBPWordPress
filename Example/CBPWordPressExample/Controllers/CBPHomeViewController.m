@@ -257,7 +257,7 @@
         self.titleImageView.image = headerImage;
         self.navigationItem.titleView = self.titleImageView;
     }
-    
+    NSLog(@"fabsf([lastHeaderUpdate timeIntervalSinceNow]) %f", fabsf([lastHeaderUpdate timeIntervalSinceNow]));
     if (lastHeaderUpdate && (fabsf([lastHeaderUpdate timeIntervalSinceNow]) < 21600)) {
         return;
     }
