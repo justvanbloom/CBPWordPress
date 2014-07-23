@@ -81,7 +81,7 @@
     self.tableView.contentOffset = CGPointMake(0, CGRectGetHeight(self.searchBar.frame));
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(onEnterForeground)
+                                             selector:@selector(willEnterForeground)
                                                  name:UIApplicationWillEnterForegroundNotification
                                                object:nil];
     
@@ -257,7 +257,7 @@
         self.titleImageView.image = headerImage;
         self.navigationItem.titleView = self.titleImageView;
     }
-    NSLog(@"fabsf([lastHeaderUpdate timeIntervalSinceNow]) %f", fabsf([lastHeaderUpdate timeIntervalSinceNow]));
+
     if (lastHeaderUpdate && (fabsf([lastHeaderUpdate timeIntervalSinceNow]) < 21600)) {
         return;
     }
@@ -285,7 +285,7 @@
                                         }];
 }
 
-- (void)onEnterForeground
+- (void)willEnterForeground
 {
     if (self.showInterstitial) {
         [self.dfpInterstitial presentFromRootViewController:self];
