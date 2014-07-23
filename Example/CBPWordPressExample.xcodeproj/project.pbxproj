@@ -809,7 +809,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/CBPWordPressExample/Vendor/GoogleAnalyticsServicesiOS",
-					"$(PROJECT_DIR)/CBPWordPressExample/Vendor/GoogleMobileAdsSdkiOS-6.9.3",
 					"$(PROJECT_DIR)/CBPWordPressExample/Vendor/GoogleMobileAdsSdkiOS",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -837,7 +836,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/CBPWordPressExample/Vendor/GoogleAnalyticsServicesiOS",
-					"$(PROJECT_DIR)/CBPWordPressExample/Vendor/GoogleMobileAdsSdkiOS-6.9.3",
 					"$(PROJECT_DIR)/CBPWordPressExample/Vendor/GoogleMobileAdsSdkiOS",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
