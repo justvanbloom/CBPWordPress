@@ -23,3 +23,15 @@ Example/Pods
 *.swp
 
 Example/CBPWordPressExample/BSConstants.h
+
+Example/CBPWordPressExample/Images.xcassets/up4-25.imageset/763-arrow-up@2x.png
+
+Example/CBPWordPressExample/Images.xcassets/up4-25.imageset/763-arrow-up.png
+
+Example/CBPWordPressExample/Images.xcassets/down4-25.imageset/764-arrow-down@2x.png
+
+Example/CBPWordPressExample/Images.xcassets/down4-25.imageset/764-arrow-down.png
+
+Example/CBPWordPressExample/Images.xcassets/842-chat-bubbles.imageset/842-chat-bubbles@2x.png
+
+Example/CBPWordPressExample/Images.xcassets/842-chat-bubbles.imageset/842-chat-bubbles.png
