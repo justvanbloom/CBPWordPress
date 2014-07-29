@@ -195,9 +195,10 @@ static NSString * const kFrameString = @"frame";
 {
     NSMutableArray *buttons = @[].mutableCopy;
     
-    self.viewCommentsButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize
-                                                                            target:self
-                                                                            action:@selector(viewCommentAction)];
+    self.viewCommentsButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"842-chat-bubbles"]
+                                                               style:UIBarButtonItemStylePlain
+                                                              target:self
+                                                              action:@selector(viewCommentAction)];
     [buttons addObject:self.viewCommentsButton];
     self.viewCommentsButton.enabled = NO;
     
