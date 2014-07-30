@@ -10,7 +10,7 @@
 #import "GAIFields.h"
 #import "GAIDictionaryBuilder.h"
 #import "HTEmailAutocompleteTextField.h"
-#import "MBProgressHUD.h"
+#import "HTProgressHUD.h"
 #import "SAMTextView.h"
 
 #import "CBPComposeCommentViewController.h"
@@ -23,6 +23,7 @@
 @property (nonatomic) CBPWordPressComment *comment;
 @property (nonatomic) SAMTextView *commentTextView;
 @property (nonatomic) HTEmailAutocompleteTextField *emailTextField;
+@property (nonatomic) HTProgressHUD *hud;
 @property (nonatomic) UITextField *nameTextField;
 @property (nonatomic, assign) NSInteger postId;
 @property (nonatomic) UITextField *urlTextField;
@@ -140,10 +141,16 @@
         newComment.parent = self.comment.commentId;
     }
     
+    self.hud = [HTProgressHUD new];
+    [self.hud showInView:self.view animated:YES];
+    self.hud.textLabel.text = NSLocalizedString(@"Posting comment", nil);
+    
     [NSURLSessionDataTask postComment:newComment
                             withBlock:^(CBPWordPressComment *comment, NSError *error){
                                 __strong typeof(weakSelf) strongSelf = weakSelf;
 
+                                [strongSelf.hud hideWithAnimation:YES];
+                                
                                 if (error) {
                                     [strongSelf showMessage:NSLocalizedString(@"There was a problem trying to post the comment, try again in a second.", nil)];
                                     
@@ -266,8 +273,7 @@
 #pragma mark - Table view delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 3)
-    {
+    if (indexPath.row == 3) {
         return CBPTextViewTableViewCellHeight;
     }
     
