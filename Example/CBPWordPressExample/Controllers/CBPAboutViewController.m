@@ -9,6 +9,7 @@
 #import <MessageUI/MessageUI.h>
 
 #import "Appirater.h"
+#import "Converser.h"
 #import "GAI.h"
 #import "GAIFields.h"
 #import "GAIDictionaryBuilder.h"
@@ -21,8 +22,8 @@
 
 #define kAppId  @"413093424"
 
-@interface CBPAboutViewController () <MFMailComposeViewControllerDelegate>
-
+@interface CBPAboutViewController () <MFMailComposeViewControllerDelegate, VGConverserDelegate, VGCustomFeedbackViewControllerDelegate>
+@property (nonatomic) VGConversationEngine *converser;
 @end
 
 @implementation CBPAboutViewController
@@ -38,6 +39,12 @@
                                                                                           action:@selector(done)];
     
     self.navigationItem.title = NSLocalizedString(@"About", nil);
+    
+    self.converser = [[VGConversationEngine alloc] initWithHostName:BSConverserAPI
+                                                             andKey:BSConverserKey];
+    if (self.converser) {
+        [self startConverser];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -49,6 +56,21 @@
 }
 
 #pragma mark -
+- (void)converserFeedback
+{
+    NSArray *fieldsArray = @[
+                             @{@"Type": @"HeaderText", @"Label" : @"YOUR FEEDBACK"},
+                             @{@"Type": @"DescriptionText", @"Label" : @"Your feedback is important to us, please fill in the box below with your query and we'll get right back to you."},
+                             @{@"Type": @"Name", @"Label" : @"Your name (optional)"},
+                             @{@"Type": @"Email", @"Label" : @"Your email address (optional)"},
+                             @{@"Type": @"TextArea", @"Label" : @"Enter your text here"},
+                             ];
+    NSDictionary *hiddenData = @{@"Source": @"BroadsheetApp"};
+
+    ConverserNavigationController *vc = [self.converser feedbackControllerWithFields:fieldsArray context:hiddenData delegate:self];
+    [self presentViewController:vc animated:YES completion:nil];
+}
+
 - (void)done
 {
     [[self parentViewController] dismissViewControllerAnimated:YES completion:nil];
@@ -66,6 +88,31 @@
     activityViewController.excludedActivityTypes = @[UIActivityTypePostToWeibo, UIActivityTypeAssignToContact, UIActivityTypeAirDrop, UIActivityTypePostToTencentWeibo, UIActivityTypePrint ];
     
     [self presentViewController:activityViewController animated:YES completion:NULL];
+}
+
+- (void) startConverser {
+    NSString *userIdentifier = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    [self.converser startWithIdentity:userIdentifier delegate:self];
+    
+
+}
+
+#pragma mark - VGConverserDelegate
+-(void) converserHasMessages:(NSNumber *)countMessages error:(NSError *)error
+{
+    
+}
+
+#pragma mark - VGCustomFeedbackViewControllerDelegate
+-(void) customFeedbackController:(VGCustomFeedbackViewController *)controller
+             didFinishWithResult:(VGCustomFeedbackResultType)result
+                           error:(NSError *)error
+{
+    if (error) {
+        NSLog(@"error sending feedback: %@", error);
+    }
+    
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - UITableViewDAtaSource
@@ -222,7 +269,8 @@
                                                                                                         action:@"button_tap"
                                                                                                          label:@"send_email"
                                                                                                          value:nil] build]];
-                    [self sendEmail];
+                    
+                    [self performSelector:@selector(converserFeedback) withObject:nil afterDelay:0.0];
                 }
                     break;
                 default:

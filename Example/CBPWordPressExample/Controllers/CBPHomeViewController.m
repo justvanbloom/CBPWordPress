@@ -318,7 +318,7 @@
 #pragma mark - GADInterstitialDelegate
 - (void)interstitialDidReceiveAd:(DFPInterstitial *)ad
 {
-    NSLog(@"Received ad successfully");
+    NSLog(@"Received interstatial ad successfully");
     
     self.showInterstitial = YES;
 }
