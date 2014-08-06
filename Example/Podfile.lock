@@ -38,7 +38,7 @@ PODS:
   - SORelativeDateTransformer (1.1.10)
   - SSCWhatsAppActivity (1.0)
   - SVPullToRefresh (HEAD based on 0.4.1)
-  - TOWebViewController (2.0.12)
+  - TOWebViewController (2.0.13)
   - TSMessages (0.9.9):
     - HexColors
   - TTTAttributedLabel (1.10.1)
@@ -83,7 +83,7 @@ SPEC CHECKSUMS:
   SORelativeDateTransformer: de7936811c9988af8e129a097af48c828f933f5f
   SSCWhatsAppActivity: a0194b86913400fbb05605ac9f0c83874f3ca377
   SVPullToRefresh: d5161ebc833a38b465364412e5e307ca80bbb190
-  TOWebViewController: 6835e64ddfd79f178a65ee46a5041c075a5aa77d
+  TOWebViewController: ec298b6393926f0eda1c4ff174eb50c3d3d95c79
   TSMessages: 2999ef55e532378692e9d14d32da2bb60e285129
   TTTAttributedLabel: 94bb04f1e005616002dd2cee0262a0082e533627
 
