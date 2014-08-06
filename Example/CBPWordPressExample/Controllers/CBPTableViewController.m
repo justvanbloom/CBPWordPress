@@ -22,6 +22,16 @@
 @end
 
 @implementation CBPTableViewController
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    
+    if (self) {
+        self.dfpAdUnit = BSHomeAdUnit;
+    }
+    
+    return self;
+}
 
 - (void)loadView
 {
@@ -80,7 +90,8 @@
     if (self.canInfiniteLoad) {
         // setup infinite scrolling
         [self.tableView addInfiniteScrollingWithActionHandler:^{
-            [weakSelf load:YES];
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            [strongSelf load:YES];
         }];
         
         self.tableView.infiniteScrollingView.enabled = NO;
@@ -101,6 +112,15 @@
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     self.errorLabel.preferredMaxLayoutWidth = CGRectGetWidth(self.view.frame) - (CBPPadding * 2);
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
+        self.dfpBannerView.adSize = kGADAdSizeSmartBannerLandscape;
+    } else {
+        self.dfpBannerView.adSize = kGADAdSizeSmartBannerPortrait;
+    }
 }
 
 #pragma mark -
@@ -159,6 +179,7 @@
 #pragma mark - GADBannerViewDelegate
 - (void)adViewDidReceiveAd:(GADBannerView *)view;
 {
+    NSLog(@"Got a banner ad");
     self.dfpBannerViewHeightConstraint.constant = 50.0f;
     
     [UIView animateWithDuration:0.3f
@@ -266,14 +287,14 @@
 - (DFPBannerView *)dfpBannerView
 {
     if (!_dfpBannerView) {
-        _dfpBannerView = [[DFPBannerView alloc] initWithAdSize:kGADAdSizeBanner];
+        _dfpBannerView = [[DFPBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerPortrait];
         _dfpBannerView.translatesAutoresizingMaskIntoConstraints = NO;
         _dfpBannerView.delegate = self;
-        _dfpBannerView.adUnitID = BSHomeAdUnit;
+        _dfpBannerView.adUnitID = self.dfpAdUnit;
         _dfpBannerView.rootViewController = self;
         GADRequest *request =[GADRequest request];
 #if TARGET_IPHONE_SIMULATOR
-        request.testDevices = @[ @"Simulator" ];
+        request.testDevices = @[ GAD_SIMULATOR_ID ];
 #endif
         [_dfpBannerView loadRequest:request];
     }

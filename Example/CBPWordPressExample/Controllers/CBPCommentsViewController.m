@@ -30,6 +30,7 @@
     
     if (self) {
         self.canPullToRefresh = YES;
+        self.dfpAdUnit = BSCommentAdUnit;
         
         _post = post;
     }

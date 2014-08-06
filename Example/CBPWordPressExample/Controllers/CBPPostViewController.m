@@ -238,6 +238,15 @@ static NSString * const kFrameString = @"frame";
     [self setToolbarItems:buttons animated:YES];
 }
 
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
+        self.dfpBannerView.adSize = kGADAdSizeSmartBannerLandscape;
+    } else {
+        self.dfpBannerView.adSize = kGADAdSizeSmartBannerPortrait;
+    }
+}
+
 #pragma mark -
 - (void)displayPost
 {
@@ -738,7 +747,7 @@ static NSString * const kFrameString = @"frame";
 - (DFPBannerView *)dfpBannerView
 {
     if (!_dfpBannerView) {
-        _dfpBannerView = [[DFPBannerView alloc] initWithAdSize:kGADAdSizeBanner];
+        _dfpBannerView = [[DFPBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerPortrait];
         _dfpBannerView.translatesAutoresizingMaskIntoConstraints = NO;
         _dfpBannerView.backgroundColor = self.view.backgroundColor;
         _dfpBannerView.delegate = self;
