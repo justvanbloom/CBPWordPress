@@ -8,6 +8,8 @@
 
 #import <Crashlytics/Crashlytics.h>
 #import "GAI.h"
+#import "GAIFields.h"
+#import "GAIDictionaryBuilder.h"
 #import <GooglePlus/GooglePlus.h>
 
 #import "CBPAppDelegate.h"
@@ -105,6 +107,11 @@
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
 {
     [self.navigationController popToRootViewControllerAnimated:NO];
+    
+    [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"
+                                                                                        action:@"notification"
+                                                                                         label:@"opened_from_local"
+                                                                                         value:nil] build]];
 }
 
 #pragma mark -
