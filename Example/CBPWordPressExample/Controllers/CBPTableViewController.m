@@ -43,7 +43,8 @@
     
     [self.view addSubview:self.dfpBannerView];
     
-    NSDictionary *views = @{@"dfpBannerView": self.dfpBannerView,
+    NSDictionary *views = @{@"topLayoutGuide": self.topLayoutGuide,
+                            @"dfpBannerView": self.dfpBannerView,
                             @"containerView": self.containerView};
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[dfpBannerView][containerView]|"
@@ -61,7 +62,7 @@
     self.dfpBannerViewHeightConstraint = [NSLayoutConstraint constraintWithItem:self.dfpBannerView
                                                                       attribute:NSLayoutAttributeTop
                                                                       relatedBy:NSLayoutRelationEqual
-                                                                         toItem:self.view
+                                                                         toItem:self.topLayoutGuide
                                                                       attribute:NSLayoutAttributeTop
                                                                      multiplier:1.0f
                                                                        constant:-50.0f];
