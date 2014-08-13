@@ -141,26 +141,21 @@
     [self.dataSource loadMore:more withParams:[self generateParams] withBlock:^(BOOL result, NSError *error){
         __strong typeof(weakSelf) strongSelf = weakSelf;
 
-        if (result) {
+        if (result && strongSelf) {
             [strongSelf.tableView reloadData];
             
             strongSelf.canLoadMore = [strongSelf.dataSource canLoadMore];
             
             [strongSelf stopLoading:more];
+            
+            id tracker = [[GAI sharedInstance] defaultTracker];
+            [tracker set:kGAIScreenName
+                   value:[strongSelf generateScreenName]];
+            [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
         } else {
             [strongSelf errorLoading:error wasLoadingMore:more];
         }
     }];
-}
-
-- (void)stopLoading:(BOOL)more
-{
-    [super stopLoading:more];
-    
-    id tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker set:kGAIScreenName
-           value:[self generateScreenName]];
-    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 }
 
 #pragma mark - UITableViewDelegate
