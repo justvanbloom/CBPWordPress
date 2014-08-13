@@ -71,12 +71,7 @@ static NSString * const CBPSwitchTableViewCellIdentifier = @"CBPSwitchTableViewC
     self.systemFontSwitch.on = ([defaults floatForKey:CBPUserFontSize]) ? NO : YES;
     
     self.userFontSizeSlider.value = ([defaults floatForKey:CBPUserFontSize])? [defaults floatForKey:CBPUserFontSize] : CBPMinimumFontSize;
-}
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
     [[GAI sharedInstance].defaultTracker set:kGAIScreenName
                                        value:@"Settings Screen"];
 }
@@ -203,6 +198,8 @@ static NSString * const CBPSwitchTableViewCellIdentifier = @"CBPSwitchTableViewC
                 break;
         }
         
+        [cell layoutSubviews];
+        
         return cell;
     } else if (indexPath.section == 1) {
         
@@ -325,6 +322,17 @@ static NSString * const CBPSwitchTableViewCellIdentifier = @"CBPSwitchTableViewC
         _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 50.0f)];
         
         [_footerView addSubview:self.saveButton];
+        
+        NSDictionary *metrics = @{@"padding": @(CBPPadding)};
+        
+        [_footerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-(padding)-[saveButton]-(padding)-|"
+                                                                            options:0
+                                                                            metrics:metrics
+                                                                              views:@{@"saveButton": self.saveButton}]];
+        [_footerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(3)-[saveButton]-(3)-|"
+                                                                            options:0
+                                                                            metrics:metrics
+                                                                              views:@{@"saveButton": self.saveButton}]];
     }
     
     return _footerView;
@@ -348,9 +356,10 @@ static NSString * const CBPSwitchTableViewCellIdentifier = @"CBPSwitchTableViewC
 - (BButton *)saveButton
 {
     if (!_saveButton) {
-        _saveButton = [[BButton alloc] initWithFrame:CGRectMake(CBPPadding, 3.0f, CGRectGetWidth(self.view.frame) - (CBPPadding * 2), 44.0f)
+        _saveButton = [[BButton alloc] initWithFrame:CGRectZero
                                                 type:BButtonTypePrimary
                                                style:BButtonStyleBootstrapV3];
+        _saveButton.translatesAutoresizingMaskIntoConstraints = NO;
         [_saveButton setTitle:NSLocalizedString(@"Save", nil) forState:UIControlStateNormal];
         [_saveButton addTarget:self action:@selector(saveAction:) forControlEvents:UIControlEventTouchUpInside];
     }

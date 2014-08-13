@@ -45,14 +45,23 @@
     if (self.converser) {
         [self startConverser];
     }
+    
+    [[GAI sharedInstance].defaultTracker set:kGAIScreenName
+                                       value:@"About Screen"];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    [[GAI sharedInstance].defaultTracker set:kGAIScreenName
-                                       value:@"About Screen"];
+    self.converser.delegate = self;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    self.converser.delegate = nil;
 }
 
 #pragma mark -
@@ -154,6 +163,7 @@
     }
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.detailTextLabel.text = nil;
     
     switch (indexPath.section)
     {

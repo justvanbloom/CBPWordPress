@@ -82,11 +82,6 @@
     self.nameTextField.text = [defaults objectForKey:CBPCommenterName];
     self.emailTextField.text = [defaults objectForKey:CBPCommenterEmail];
     self.urlTextField.text = [defaults objectForKey:CBPCommenterURL];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
     
     [[GAI sharedInstance].defaultTracker set:kGAIScreenName
                                        value:@"Compose Comment Screen"];

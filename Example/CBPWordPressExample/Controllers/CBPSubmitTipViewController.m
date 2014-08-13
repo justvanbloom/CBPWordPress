@@ -76,11 +76,6 @@ UITextViewDelegate>
     [self.tableView registerClass:[CBPTextViewTableViewCell class] forCellReuseIdentifier:CBPTextViewTableViewCellIdentifier];
     
     [self makeFooter];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
     
     [[GAI sharedInstance].defaultTracker set:kGAIScreenName
                                        value:@"Tip Screen"];
@@ -619,12 +614,12 @@ UITextViewDelegate>
         _messageTextView = [SAMTextView new];
         _messageTextView.backgroundColor = [UIColor clearColor];
         _messageTextView.font = self.emailTextField.font;
-        _messageTextView.contentInset = UIEdgeInsetsMake(5.0f, 10.0f, 5.0f, 10.0f);
+        _messageTextView.contentInset = UIEdgeInsetsMake(5.0f, 6.0f, 5.0f, 6.0f);
         _messageTextView.delegate = self;
         
         NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc]initWithString:NSLocalizedString(@"What have you got for us?", @"Placeholder text for the tip submission")];
         [attributedString addAttribute:NSForegroundColorAttributeName
-                                 value:[UIColor colorWithWhite:0.8 alpha:1.0f]
+                                 value:[UIColor colorWithWhite:0.8f alpha:1.0f]
                                  range:NSMakeRange(0, [attributedString length])];
         [attributedString addAttribute:NSFontAttributeName
                                  value:self.emailTextField.font
