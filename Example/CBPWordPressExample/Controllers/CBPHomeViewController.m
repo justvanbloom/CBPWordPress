@@ -237,16 +237,6 @@
     [super load:more];
 }
 
-- (void)stopLoading:(BOOL)more
-{
-    [super stopLoading:more];
-    
-    if (!more) {
-        CGFloat offset = ([self.searchBar.text length]) ? 0 : CGRectGetHeight(self.searchBar.frame);
-        [self.tableView setContentOffset:CGPointMake(0, offset) animated:YES];
-    }
-}
-
 #pragma mark -
 - (void)updateHeaderImage
 {
@@ -299,10 +289,6 @@
         self.showInterstitial = NO;
     }
     
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:CBPBackgroundUpdate]) {
-        return;
-    }
-    
     [self.tableView triggerPullToRefresh];
 }
 
@@ -344,8 +330,7 @@
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    if ((scrollView.contentOffset.y > 0) && (scrollView.contentOffset.y < CGRectGetHeight(self.searchBar.frame)))
-    {
+    if ((scrollView.contentOffset.y > 0) && (scrollView.contentOffset.y < CGRectGetHeight(self.searchBar.frame))) {
         [scrollView setContentOffset:CGPointMake(0, CGRectGetHeight(self.searchBar.frame)) animated:YES];
     }
 }
@@ -353,8 +338,7 @@
 #pragma mark - UISearchBarDelegate
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-    if ([searchBar.text length])
-    {
+    if ([searchBar.text length]) {
         searchBar.showsCancelButton = YES;
     }
 }
