@@ -384,7 +384,7 @@
     if (!_dfpInterstitial) {
         _dfpInterstitial = [GADInterstitial new];
         _dfpInterstitial.delegate = self;
-        _dfpInterstitial.adUnitID = @"/6253334/dfp_example_ad/interstitial";
+        _dfpInterstitial.adUnitID = BSInterstatialAdUnit;
     }
     
     return _dfpInterstitial;
