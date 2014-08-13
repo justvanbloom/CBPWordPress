@@ -46,7 +46,7 @@
     NSDictionary *views = @{@"dfpBannerView": self.dfpBannerView,
                             @"containerView": self.containerView};
     
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[dfpBannerView][containerView]|"
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[dfpBannerView][containerView]|"
                                                                       options:0
                                                                       metrics:nil
                                                                         views:views]];
@@ -59,12 +59,12 @@
                                                                       metrics:nil
                                                                         views:views]];
     self.dfpBannerViewHeightConstraint = [NSLayoutConstraint constraintWithItem:self.dfpBannerView
-                                                                      attribute:NSLayoutAttributeHeight
+                                                                      attribute:NSLayoutAttributeTop
                                                                       relatedBy:NSLayoutRelationEqual
-                                                                         toItem:nil
-                                                                      attribute:NSLayoutAttributeNotAnAttribute
+                                                                         toItem:self.view
+                                                                      attribute:NSLayoutAttributeTop
                                                                      multiplier:1.0f
-                                                                       constant:50.0f];
+                                                                       constant:-50.0f];
     [self.view addConstraint:self.dfpBannerViewHeightConstraint];
 }
 
@@ -180,7 +180,7 @@
 - (void)adViewDidReceiveAd:(GADBannerView *)view;
 {
     NSLog(@"Got a banner ad");
-    self.dfpBannerViewHeightConstraint.constant = 50.0f;
+    self.dfpBannerViewHeightConstraint.constant = 0;
     
     [UIView animateWithDuration:0.3f
                      animations:^() {
@@ -190,7 +190,7 @@
 
 - (void)adView:(GADBannerView *)view didFailToReceiveAdWithError:(GADRequestError *)error
 {
-    self.dfpBannerViewHeightConstraint.constant = 0;
+    self.dfpBannerViewHeightConstraint.constant = -50.0f;
     
     [UIView animateWithDuration:0.3f
                      animations:^() {

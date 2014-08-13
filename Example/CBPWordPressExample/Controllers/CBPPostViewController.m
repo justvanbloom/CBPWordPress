@@ -122,7 +122,7 @@ static NSString * const kFrameString = @"frame";
     NSDictionary *views = @{@"dfpBannerView": self.dfpBannerView,
                             @"containerView": self.containerView};
     
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[dfpBannerView][containerView]|"
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[dfpBannerView][containerView]|"
                                                                       options:0
                                                                       metrics:nil
                                                                         views:views]];
@@ -135,12 +135,12 @@ static NSString * const kFrameString = @"frame";
                                                                       metrics:nil
                                                                         views:views]];
     self.dfpBannerViewHeightConstraint = [NSLayoutConstraint constraintWithItem:self.dfpBannerView
-                                                                      attribute:NSLayoutAttributeHeight
+                                                                      attribute:NSLayoutAttributeTop
                                                                       relatedBy:NSLayoutRelationEqual
-                                                                         toItem:nil
-                                                                      attribute:NSLayoutAttributeNotAnAttribute
+                                                                         toItem:self.view
+                                                                      attribute:NSLayoutAttributeTop
                                                                      multiplier:1.0f
-                                                                       constant:50.0f];
+                                                                       constant:-50.0f];
     [self.view addConstraint:self.dfpBannerViewHeightConstraint];
     
     self.scrollView = self.webView.scrollView;
@@ -493,7 +493,7 @@ static NSString * const kFrameString = @"frame";
 #pragma mark - GADBannerViewDelegate
 - (void)adViewDidReceiveAd:(GADBannerView *)view;
 {
-    self.dfpBannerViewHeightConstraint.constant = 50.0f;
+    self.dfpBannerViewHeightConstraint.constant = 0;
     
     [UIView animateWithDuration:0.3f
                      animations:^() {
@@ -503,7 +503,7 @@ static NSString * const kFrameString = @"frame";
 
 - (void)adView:(GADBannerView *)view didFailToReceiveAdWithError:(GADRequestError *)error
 {
-    self.dfpBannerViewHeightConstraint.constant = 0;
+    self.dfpBannerViewHeightConstraint.constant = -50.0f;
     
     [UIView animateWithDuration:0.3f
                      animations:^() {
