@@ -118,7 +118,7 @@
                            error:(NSError *)error
 {
     if (error) {
-        NSLog(@"error sending feedback: %@", error);
+
     }
     
     [controller dismissViewControllerAnimated:YES completion:nil];

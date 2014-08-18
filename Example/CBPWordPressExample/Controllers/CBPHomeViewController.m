@@ -277,7 +277,7 @@
                                             [defaults synchronize];
                                         }
                                         failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                                            NSLog(@"Error: %@", error);
+                                            //No need to tell user if the header update failed
                                         }];
 }
 
@@ -310,14 +310,7 @@
 #pragma mark - GADInterstitialDelegate
 - (void)interstitialDidReceiveAd:(DFPInterstitial *)ad
 {
-    NSLog(@"Received interstatial ad successfully");
-    
     self.showInterstitial = YES;
-}
-
-- (void)interstitial:(DFPInterstitial *)ad didFailToReceiveAdWithError:(GADRequestError *)error
-{
-    NSLog(@"Failed to receive ad with error: %@", [error localizedFailureReason]);
 }
 
 - (void)interstitialDidDismissScreen:(DFPInterstitial *)interstitial

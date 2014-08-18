@@ -110,7 +110,6 @@
                                              
                                              block(YES, nil);
                                          } else {
-                                             NSLog(@"Error: %@", error);
                                              block(NO, error);
                                          }
                                      }];
@@ -162,7 +161,6 @@
 
                                              block([posts count], nil);
                                          } else {
-                                             NSLog(@"Error: %@", error);
                                              block(NO, error);
                                          }
                                      }];

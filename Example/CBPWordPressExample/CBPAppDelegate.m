@@ -86,9 +86,7 @@
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
-{
-    NSLog(@"sourceApplication: %@", sourceApplication);
-    
+{    
     if ([[url host] hasSuffix:@"broadsheet.ie"]) {
         [self.viewController openURL:url];
         

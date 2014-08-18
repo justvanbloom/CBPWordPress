@@ -21,7 +21,7 @@
         HTMLTemplate = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
         
         if (error) {
-            NSLog(@"Error loading HTML template: %@", error);
+            //handle the error where the HTML string is asked for
             
             return nil;
         }
@@ -74,7 +74,8 @@
             categorySnippet = [NSString stringWithContentsOfFile:categorypath encoding:NSUTF8StringEncoding error:&error];
             
             if (error) {
-                NSLog(@"Error loading Tag template: %@", error);
+                //User doesn't need to know if this failed
+                categorySnippet = nil;
             }
         }
         
@@ -120,7 +121,8 @@
             tagSnippet = [NSString stringWithContentsOfFile:tagpath encoding:NSUTF8StringEncoding error:&error];
             
             if (error) {
-                NSLog(@"Error loading Tag template: %@", error);
+               //User doesn't need to know this failed
+                tagSnippet = nil;
             }
         }
         

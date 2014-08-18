@@ -278,7 +278,7 @@ static NSString * const kFrameString = @"frame";
                                          
                                          [strongSelf displayPost];
                                      } else {
-                                         NSLog(@"Error: %@", error);
+                                         //NSLog(@"Error: %@", error);
                                          
                                      }
                                  }];
@@ -559,7 +559,7 @@ static NSString * const kFrameString = @"frame";
                                                 
                                                 strongSelf.scrollToMore = YES;
                                             } else {
-                                                NSLog(@"Error: %@", error);
+                                                [self showError:NSLocalizedString(@"There was a problem loading the rest of the post, try again in a minute.", nil)];
                                             }
                                         }];
             
@@ -886,7 +886,7 @@ static NSString * const kFrameString = @"frame";
         ok = [audioSession setCategory:AVAudioSessionCategoryPlayback
                                  error:&setCategoryError];
         if (!ok) {
-            NSLog(@"%s setCategoryError=%@", __PRETTY_FUNCTION__, setCategoryError);
+            //Usewr doesn't need to know if the sound setting failed
         }
         
         _webView = [[UIWebView alloc] initWithFrame:self.view.frame];

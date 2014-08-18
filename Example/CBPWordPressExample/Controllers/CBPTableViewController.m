@@ -180,7 +180,6 @@
 #pragma mark - GADBannerViewDelegate
 - (void)adViewDidReceiveAd:(GADBannerView *)view;
 {
-    NSLog(@"Got a banner ad");
     self.dfpBannerViewHeightConstraint.constant = 0;
     
     [UIView animateWithDuration:0.3f
