@@ -28,6 +28,7 @@
 @property (nonatomic) HTProgressHUD *hud;
 @property (nonatomic) UITextField *nameTextField;
 @property (nonatomic, assign) NSInteger postId;
+@property (nonatomic) UISwitch *subscribeSwitch;
 @property (nonatomic) UITextField *urlTextField;
 @end
 
@@ -85,6 +86,8 @@
     
     [[GAI sharedInstance].defaultTracker set:kGAIScreenName
                                        value:@"Compose Comment Screen"];
+    
+    self.subscribeSwitch = [UISwitch new];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -141,26 +144,35 @@
     self.hud = [HTProgressHUD new];
     [self.hud showInView:self.view animated:YES];
     self.hud.textLabel.text = NSLocalizedString(@"Posting comment", nil);
+
+    NSMutableDictionary *params = [newComment dictionaryRepresentation].mutableCopy;
+    if (self.subscribeSwitch.on) {
+        params[@"subscribe"] = @(1);
+    }
     
-    [NSURLSessionDataTask postComment:newComment
-                            withBlock:^(CBPWordPressComment *comment, NSError *error){
-                                __strong typeof(weakSelf) strongSelf = weakSelf;
-                                
-                                [strongSelf.hud hideWithAnimation:YES];
-                                
-                                if (error) {
-                                    [strongSelf showError:NSLocalizedString(@"There was a problem trying to post the comment, try again in a second.", nil)];
-                                    
-                                    return;
-                                }
-                                
-                                if (strongSelf.comment) {
-                                    comment.level = strongSelf.comment.level + 1;
-                                }
-                                
-                                strongSelf.completionBlock(comment, nil);
-                                
-                            }];
+     [[CBPWordPressAPIClient sharedClient] POST:@"/?json=respond.submit_comment" parameters:params success:^(NSURLSessionDataTask * __unused task, id JSON) {
+        
+         __strong typeof(weakSelf) strongSelf = weakSelf;
+         
+         [strongSelf.hud hideWithAnimation:YES];
+         
+        if (![JSON[@"status"] isEqualToString:@"error"]) {
+            CBPWordPressComment *comment = [CBPWordPressComment initFromDictionary:JSON];
+            
+            if (strongSelf.comment) {
+                comment.level = strongSelf.comment.level + 1;
+            }
+            
+            strongSelf.completionBlock(comment, nil);
+        } else {
+            [strongSelf showError:NSLocalizedString(@"There was a problem trying to post the comment, try again in a second.", nil)];
+        }
+    } failure:^(NSURLSessionDataTask *__unused task, NSError *error) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+
+        [strongSelf showError:NSLocalizedString(@"There was a problem trying to post the comment, try again in a second.", nil)];
+
+    }];
     [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"
                                                                                         action:@"button_tap"
                                                                                          label:@"post_comment"
@@ -254,7 +266,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 4;
+    return 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -264,6 +276,18 @@
         CBPTextViewTableViewCell *cell = (CBPTextViewTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CBPTextViewTableViewCellIdentifier];
         
         cell.inputTextView = self.commentTextView;
+        
+        return cell;
+    } else if (indexPath.row == 4) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"subscribecell"];
+
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"subscribecell"];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+        
+        cell.textLabel.text = NSLocalizedString(@"Subscribe to comments", nil);
+        cell.accessoryView = self.subscribeSwitch;
         
         return cell;
     }
@@ -366,7 +390,7 @@
     if (!_commentTextView) {
         _commentTextView = [SAMTextView new];
         _commentTextView.font = self.emailTextField.font;
-        _commentTextView.contentInset = UIEdgeInsetsMake(5.0f, 10.0f, 5.0f, 10.0f);
+        _commentTextView.contentInset = UIEdgeInsetsMake(5.0f, 5.0f, 5.0f, 5.0f);
         
         NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc]initWithString:NSLocalizedString(@"What have you to say?", @"Placeholder text for the comment submission")];
         [attributedString addAttribute:NSForegroundColorAttributeName
