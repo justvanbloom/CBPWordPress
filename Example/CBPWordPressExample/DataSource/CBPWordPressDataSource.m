@@ -181,7 +181,9 @@
     cell.postTitle = [post.title kv_decodeHTMLCharacterEntities];
     cell.imageURI = post.thumbnail;
     cell.postDate = post.date;
-    cell.commentCount = post.commentCount;
+    if ([post.commentStatus isEqualToString:@"open"] || post.commentCount) {
+        cell.commentCount = post.commentCount;
+    }
     
     return cell;
 }

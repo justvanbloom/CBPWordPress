@@ -90,6 +90,11 @@
     if ([[url host] hasSuffix:@"broadsheet.ie"]) {
         [self.viewController openURL:url];
         
+        [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"
+                                                                                            action:@"notification"
+                                                                                             label:@"opened_from_url"
+                                                                                             value:nil] build]];
+        
         return YES;
     }
     

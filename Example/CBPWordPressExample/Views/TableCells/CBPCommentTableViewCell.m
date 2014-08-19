@@ -147,7 +147,6 @@ static NSDateFormatter *commentDateFormatter = nil;
     [self.contentView setNeedsLayout];
     [self.contentView layoutIfNeeded];
     
-    //[self.replyButton sizeToFit];
     CGFloat indent = self.level1WidthConstraint.constant + self.level2WidthConstraint.constant + self.level3WidthConstraint.constant + self.level4WidthConstraint.constant;
     
     self.commentLabel.preferredMaxLayoutWidth = CGRectGetWidth(self.contentView.frame) - (CBPPadding * 2) - indent;
