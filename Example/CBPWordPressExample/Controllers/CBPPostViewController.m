@@ -34,7 +34,8 @@ static const CGFloat CBPLoadPostViewMultiplier = 1.5;
 static NSString * const kContentOffsetString = @"contentOffset";
 static NSString * const kFrameString = @"frame";
 
-@interface CBPPostViewController () <GADBannerViewDelegate, UIScrollViewDelegate, UIWebViewDelegate>
+@interface CBPPostViewController () <GADBannerViewDelegate, UIAlertViewDelegate, UIScrollViewDelegate, UIWebViewDelegate>
+@property (nonatomic, assign) BOOL alertShown;
 @property (nonatomic, assign) CGFloat baseFontSize;
 @property (nonatomic) UIView *containerView;
 @property (nonatomic, weak) CBPWordPressDataSource *dataSource;
@@ -44,6 +45,7 @@ static NSString * const kFrameString = @"frame";
 @property (nonatomic) UIBarButtonItem *nextPostButton;
 @property (nonatomic) UILabel * nextTitleLabel;
 @property (nonatomic) UIView *nextView;
+@property (nonatomic, assign) BOOL pinchAllowed;
 @property (nonatomic) CBPWordPressPost *post;
 @property (nonatomic) UIBarButtonItem *postCommentButton;
 @property (nonatomic) UIBarButtonItem *previousPostButton;
@@ -67,6 +69,8 @@ static NSString * const kFrameString = @"frame";
         
         if (!_baseFontSize) {
             _baseFontSize = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleBody].pointSize;
+        } else {
+            _pinchAllowed = YES;
         }
     }
     
@@ -511,6 +515,22 @@ static NSString * const kFrameString = @"frame";
                      }];
 }
 
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
+{
+    if (buttonIndex == alertView.cancelButtonIndex) {
+        return;
+    }
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    [defaults setFloat:self.baseFontSize forKey:CBPUserFontSize];
+    
+    [defaults synchronize];
+    
+    self.pinchAllowed = YES;
+}
+
 #pragma mark - UIWebViewDelegate
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
@@ -619,6 +639,18 @@ static NSString * const kFrameString = @"frame";
 #pragma mark - UIPinchGestureRecognizer
 - (void)pinchAction:(UIPinchGestureRecognizer *)gestureRecognizer
 {
+    if (!self.pinchAllowed && !self.alertShown) {
+        self.alertShown = YES;
+        
+        [[[UIAlertView alloc] initWithTitle:nil
+                                    message:NSLocalizedString(@"If you want to see a larger version of an image, tap on it.\nIf you want to make the text larger by pinching you can enable it below.", nil)
+                                   delegate:self
+                          cancelButtonTitle:NSLocalizedString(@"Okay", nil)
+                          otherButtonTitles:NSLocalizedString(@"Enlarge text", nil), nil] show];
+        
+        return;
+    }
+    
     CGFloat pinchScale = gestureRecognizer.scale;
     
     if (pinchScale < 1) {
@@ -896,12 +928,10 @@ static NSString * const kFrameString = @"frame";
         _webView.mediaPlaybackRequiresUserAction = YES;
         _webView.delegate = self;
         
-        if ([[NSUserDefaults standardUserDefaults] floatForKey:CBPUserFontSize]) {
-            UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self
-                                                                                        action:@selector(pinchAction:)];
-            
-            [_webView addGestureRecognizer:pinch];
-        }
+        UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self
+                                                                                    action:@selector(pinchAction:)];
+        
+        [_webView addGestureRecognizer:pinch];
     }
     
     return _webView;
