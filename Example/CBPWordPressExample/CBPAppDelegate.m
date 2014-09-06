@@ -26,7 +26,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    [CBPWordPressAPIClient rootURI:@"http://broadsheet.ie"];
+    [CBPWordPressAPIClient rootURI:CBPApiURL];
                                                            
     self.viewController = [CBPHomeViewController new];
     
@@ -86,8 +86,8 @@
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
-{    
-    if ([[url host] hasSuffix:@"broadsheet.ie"]) {
+{
+    if ([[url host] hasSuffix:CBPSiteURL]) {
         [self.viewController openURL:url];
         
         [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"
