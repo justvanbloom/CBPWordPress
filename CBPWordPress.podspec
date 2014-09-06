@@ -15,5 +15,5 @@ DESC
   s.ios.deployment_target = '7.0'
   s.requires_arc = true
   s.source_files = 'CBPWordPress/*.{h,m}'
-  s.dependency 'AFNetworking', '~> 2.0.0'
+  s.dependency 'AFNetworking', '~> 2.0'
 end

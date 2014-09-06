@@ -164,6 +164,13 @@
     [self load:NO];
 }
 
+- (void)openPost:(NSInteger)postId
+{
+    UIViewController *vc = [[CBPPostViewController alloc] initWithPostId:postId];
+    
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 - (void)openURL:(NSURL *)url
 {
     UIViewController *vc;

@@ -86,13 +86,22 @@
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
-{
+{        
     if ([[url host] hasSuffix:CBPSiteURL]) {
         [self.viewController openURL:url];
         
         [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"
                                                                                             action:@"notification"
                                                                                              label:@"opened_from_url"
+                                                                                             value:nil] build]];
+        
+        return YES;
+    } else if ([[url scheme] isEqualToString:@"BroadsheetIe"]) {
+        [self.viewController openPost:[[url host] integerValue]];
+        
+        [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"
+                                                                                            action:@"notification"
+                                                                                             label:@"opened_from_today"
                                                                                              value:nil] build]];
         
         return YES;

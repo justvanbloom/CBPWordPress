@@ -47,6 +47,7 @@ static NSString * const kFrameString = @"frame";
 @property (nonatomic) UIView *nextView;
 @property (nonatomic, assign) BOOL pinchAllowed;
 @property (nonatomic) CBPWordPressPost *post;
+@property (nonatomic, assign) NSInteger postId;
 @property (nonatomic) UIBarButtonItem *postCommentButton;
 @property (nonatomic) UIBarButtonItem *previousPostButton;
 @property (nonatomic) UILabel * previousTitleLabel;
@@ -83,6 +84,19 @@ static NSString * const kFrameString = @"frame";
     
     if (self) {
         _post = post;
+    }
+    
+    return self;
+}
+
+- (instancetype)initWithPostId:(NSInteger)postId
+{
+    self = [self initWithNibName:nil bundle:nil];
+    
+    if (self) {
+        _postId = postId;
+        
+        _url = [NSURL URLWithString:[NSString stringWithFormat:@"http://broadsheet.ie/?id=%ld", (long)postId]];
     }
     
     return self;

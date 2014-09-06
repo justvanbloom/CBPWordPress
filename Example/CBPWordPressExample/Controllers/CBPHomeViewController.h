@@ -10,5 +10,6 @@
 
 @interface CBPHomeViewController : CBPPostListViewController
 - (void)backgroundUpdateWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
+- (void)openPost:(NSInteger)postId;
 - (void)openURL:(NSURL *)url;
 @end
