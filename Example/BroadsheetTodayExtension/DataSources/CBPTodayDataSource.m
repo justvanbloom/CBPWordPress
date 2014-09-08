@@ -20,6 +20,18 @@
 
 @implementation CBPTodayDataSource
 #pragma mark -
+- (instancetype)init
+{
+    self = [super init];
+    
+    if (self) {
+        _firstItemStatus = CBPTodayDataSourceItemUnknown;
+        _secondItemStatus = CBPTodayDataSourceItemUnknown;
+    }
+    
+    return self;
+}
+
 - (void)loadPosts:(NSInteger)count completion:(void (^)(NSError* error)) handler
 {
     __weak typeof(self) weakSelf = self;
@@ -28,6 +40,25 @@
                     completion:^(NSArray *posts, NSError* error) {
                         if (!error) {
                             __strong typeof(weakSelf) strongSelf = self;
+                            
+                            NSInteger count = 0;
+                            for (CBPWordPressTodayPost *post in posts) {
+                                if (((CBPWordPressTodayPost *)strongSelf.items[count]).postId != post.postId) {
+                                    if (count) {
+                                        strongSelf.secondItemStatus = CBPTodayDataSourceItemDifferent;
+                                    } else {
+                                        strongSelf.firstItemStatus = CBPTodayDataSourceItemDifferent;
+                                    }
+                                } else {
+                                    if (count) {
+                                        strongSelf.secondItemStatus = CBPTodayDataSourceItemSame;
+                                    } else {
+                                        strongSelf.firstItemStatus = CBPTodayDataSourceItemSame;
+                                    }
+                                }
+                                
+                                count++;
+                            }
                             
                             strongSelf.items = posts;
                             handler(nil);

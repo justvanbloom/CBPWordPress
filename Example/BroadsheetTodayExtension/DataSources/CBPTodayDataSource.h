@@ -10,7 +10,16 @@
 
 @class CBPWordPressTodayPost;
 
+typedef NS_ENUM(NSInteger, CBPTodayDataSourceItemStatus) {
+    CBPTodayDataSourceItemUnknown,
+    CBPTodayDataSourceItemSame,
+    CBPTodayDataSourceItemDifferent
+};
+
 @interface CBPTodayDataSource : NSObject <UITableViewDataSource>
 - (void)loadPosts:(NSInteger)count completion:(void (^)(NSError* error)) handler;
 - (CBPWordPressTodayPost *)postAtIndex:(NSInteger)index;
+
+@property (nonatomic, assign) NSInteger firstItemStatus;
+@property (nonatomic, assign) NSInteger secondItemStatus;
 @end

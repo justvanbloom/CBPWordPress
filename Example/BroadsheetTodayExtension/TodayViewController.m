@@ -16,6 +16,7 @@
 #import "CBPWordPressTodayPost.h"
 
 @interface TodayViewController () <NCWidgetProviding, UITableViewDelegate>
+@property (nonatomic, assign) BOOL contentShown;
 @property (nonatomic) CBPTodayDataSource *dataSource;
 @property (nonatomic) UITableView *tableView;
 @end
@@ -67,8 +68,20 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tableView beginUpdates];
         
-        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationLeft];
-        
+        if (((self.dataSource.firstItemStatus == CBPTodayDataSourceItemUnknown) && (self.dataSource.secondItemStatus == CBPTodayDataSourceItemUnknown))
+            || !self.contentShown) {
+            self.contentShown = YES;
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+        } else {
+            if (self.dataSource.firstItemStatus == CBPTodayDataSourceItemDifferent) {
+                [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationLeft];
+            }
+            
+            if (self.dataSource.secondItemStatus == CBPTodayDataSourceItemDifferent) {
+                [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:0]] withRowAnimation:UITableViewRowAnimationLeft];
+                
+            }
+        }
         [self.tableView endUpdates];
         
         CGFloat height = (self.tableView.contentSize.height) ? self.tableView.contentSize.height : [self.dataSource tableView:self.tableView numberOfRowsInSection:0] * CBPTodayTableViewCellHeight;

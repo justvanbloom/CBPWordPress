@@ -95,8 +95,6 @@ static NSString * const kFrameString = @"frame";
     
     if (self) {
         _postId = postId;
-        
-        _url = [NSURL URLWithString:[NSString stringWithFormat:@"http://broadsheet.ie/?id=%ld", (long)postId]];
     }
     
     return self;
@@ -174,6 +172,8 @@ static NSString * const kFrameString = @"frame";
         [self displayPost];
     } else if (self.url) {
         [self loadPost];
+    } else if (self.postId) {
+        [self loadPostFromId];
     }
 }
 
@@ -284,6 +284,29 @@ static NSString * const kFrameString = @"frame";
     __weak typeof(self) weakSelf = self;
     
     [NSURLSessionDataTask fetchPostWithURL:self.url
+                                 withBlock:^(CBPWordPressPost *post, NSError *error) {
+                                     if (!error) {
+                                         __strong typeof(weakSelf) strongSelf = weakSelf;
+                                         
+                                         strongSelf.post = post;
+                                         
+                                         if (strongSelf.dataSource && (strongSelf.index >= [strongSelf.dataSource.posts count])) {
+                                             [strongSelf.dataSource addPost:post];
+                                         }
+                                         
+                                         [strongSelf displayPost];
+                                     } else {
+                                         //NSLog(@"Error: %@", error);
+                                         
+                                     }
+                                 }];
+}
+
+- (void)loadPostFromId
+{
+    __weak typeof(self) weakSelf = self;
+    
+    [NSURLSessionDataTask fetchPostWithId:self.postId
                                  withBlock:^(CBPWordPressPost *post, NSError *error) {
                                      if (!error) {
                                          __strong typeof(weakSelf) strongSelf = weakSelf;
