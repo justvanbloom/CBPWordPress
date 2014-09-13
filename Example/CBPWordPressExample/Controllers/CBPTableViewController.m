@@ -399,8 +399,8 @@
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
         _tableView.translatesAutoresizingMaskIntoConstraints = NO;
-        _tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         _tableView.delegate = self;
+        _tableView.rowHeight = UITableViewAutomaticDimension;
     }
     
     return _tableView;

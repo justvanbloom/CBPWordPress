@@ -185,6 +185,9 @@
         cell.commentCount = post.commentCount;
     }
     
+    [cell setNeedsUpdateConstraints];
+    [cell updateConstraintsIfNeeded];
+    
     return cell;
 }
 @end
