@@ -25,6 +25,21 @@
     [self setValuesForKeysWithDictionary:aDictionary];
 }
 
+- (void)setValue:(id)value forKey:(NSString *)key
+{
+    if ([key isEqualToString:@"date"]) {
+        static NSDateFormatter *postDateFormatter;
+        if (!postDateFormatter) {
+            postDateFormatter = [NSDateFormatter new];
+            [postDateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        }
+        self.date = [postDateFormatter dateFromString:value];
+    } else {
+        [super setValue:value forKey:key];
+    }
+}
+
+
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key
 {
     if ([key isEqualToString:@"comment_count"]) {

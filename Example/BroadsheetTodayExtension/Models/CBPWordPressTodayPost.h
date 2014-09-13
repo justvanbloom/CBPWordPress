@@ -16,7 +16,7 @@
 @property (nonatomic) NSString *commentStatus;
 @property (nonatomic) NSArray *comments;
 @property (nonatomic) NSString *content;
-@property (nonatomic) NSString *date;
+@property (nonatomic) NSDate *date;
 @property (nonatomic) NSString *excerpt;
 @property (nonatomic, assign) NSInteger postId;
 @property (nonatomic) NSString *postHtml;

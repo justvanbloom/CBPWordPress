@@ -15,6 +15,7 @@
 #import "CBPWordPressTodayPost.h"
 
 @interface CBPTodayDataSource()
+@property (nonatomic) NSDateFormatter *dateFormatter;
 @property (nonatomic) NSArray *items;
 @end
 
@@ -26,6 +27,8 @@
     
     if (self) {
         _firstItemStatus = CBPTodayDataSourceItemUnknown;
+        _dateFormatter = [NSDateFormatter new];
+        [_dateFormatter setDateFormat:@"HH:mm"];
         _secondItemStatus = CBPTodayDataSourceItemUnknown;
     }
     
@@ -87,12 +90,14 @@
     
     cell.postTitle = post.title;
     cell.imageURI = post.thumbnail;
-    cell.postDate = post.date;
+    cell.postDate = [self.dateFormatter stringFromDate:post.date];
     cell.commentCount = post.commentCount;
     
     // Make sure the constraints have been added to this cell, since it may have just been created from scratch
     [cell setNeedsUpdateConstraints];
     [cell updateConstraintsIfNeeded];
+    
+    [cell layoutIfNeeded];
     
     return cell;
 }

@@ -17,6 +17,7 @@
 
 @interface TodayViewController () <NCWidgetProviding, UITableViewDelegate>
 @property (nonatomic, assign) BOOL contentShown;
+@property (nonatomic, assign) BOOL didUpdateConstraints;
 @property (nonatomic) CBPTodayDataSource *dataSource;
 @property (nonatomic) UITableView *tableView;
 @end
@@ -30,6 +31,15 @@
     self.view.backgroundColor = [UIColor clearColor];
     
     [self.view addSubview:self.tableView];
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[tableView]|"
+                                                                      options:0
+                                                                      metrics:nil
+                                                                        views:@{@"tableView": self.tableView}]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[tableView]|"
+                                                                      options:0
+                                                                      metrics:nil
+                                                                        views:@{@"tableView": self.tableView}]];
 }
 
 - (void)viewDidLoad {
@@ -113,7 +123,8 @@
 - (UITableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:self.view.frame];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectZero];
+        _tableView.translatesAutoresizingMaskIntoConstraints = NO;
         _tableView.delegate = self;
         _tableView.dataSource = self.dataSource;
         
