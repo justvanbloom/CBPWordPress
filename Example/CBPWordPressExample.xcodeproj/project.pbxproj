@@ -15,10 +15,13 @@
 		344470CC197DA96500166229 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 344470CB197DA96500166229 /* SystemConfiguration.framework */; };
 		344470CE197DA96E00166229 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 344470CD197DA96E00166229 /* libz.dylib */; };
 		344470D0197DAAD500166229 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 344470CF197DAAD500166229 /* libsqlite3.0.dylib */; };
+		34481FAD19BD890B001748C2 /* UIView+CBP.m in Sources */ = {isa = PBXBuildFile; fileRef = 34481FAC19BD890B001748C2 /* UIView+CBP.m */; };
+		34481FB219BE4E3E001748C2 /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 34481FB019BE4E3E001748C2 /* NSString+HTML.m */; };
 		34506DB619917A6800962889 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34506DB519917A6800962889 /* MessageUI.framework */; };
 		34506DB819917A8000962889 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34506DB719917A8000962889 /* QuartzCore.framework */; };
 		347E285F190849B2004D3842 /* CBPCommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 347E285E190849B2004D3842 /* CBPCommentsViewController.m */; };
 		347E286219084AA1004D3842 /* CBPComposeCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 347E286119084AA1004D3842 /* CBPComposeCommentViewController.m */; };
+		348DFB2719C3B14D004766DE /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 348DFB2619C3B14D004766DE /* Launch Screen.xib */; };
 		349C67F51956254500D25654 /* CBPHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 349C67F41956254500D25654 /* CBPHomeViewController.m */; };
 		349C67F71958AA7500D25654 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 349C67F61958AA7500D25654 /* Settings.bundle */; };
 		349C67FC1958AC9200D25654 /* CBPSubmitTipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 349C67FB1958AC9200D25654 /* CBPSubmitTipViewController.m */; };
@@ -302,12 +305,17 @@
 		344470CB197DA96500166229 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		344470CD197DA96E00166229 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		344470CF197DAAD500166229 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		34481FAB19BD890B001748C2 /* UIView+CBP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CBP.h"; sourceTree = "<group>"; };
+		34481FAC19BD890B001748C2 /* UIView+CBP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CBP.m"; sourceTree = "<group>"; };
+		34481FAF19BE4E3E001748C2 /* NSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HTML.h"; sourceTree = "<group>"; };
+		34481FB019BE4E3E001748C2 /* NSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HTML.m"; sourceTree = "<group>"; };
 		34506DB519917A6800962889 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		34506DB719917A8000962889 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		347E285D190849B2004D3842 /* CBPCommentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBPCommentsViewController.h; sourceTree = "<group>"; };
 		347E285E190849B2004D3842 /* CBPCommentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBPCommentsViewController.m; sourceTree = "<group>"; };
 		347E286019084AA1004D3842 /* CBPComposeCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBPComposeCommentViewController.h; sourceTree = "<group>"; };
 		347E286119084AA1004D3842 /* CBPComposeCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBPComposeCommentViewController.m; sourceTree = "<group>"; };
+		348DFB2619C3B14D004766DE /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		349C67F31956254500D25654 /* CBPHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBPHomeViewController.h; sourceTree = "<group>"; };
 		349C67F41956254500D25654 /* CBPHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBPHomeViewController.m; sourceTree = "<group>"; };
 		349C67F61958AA7500D25654 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -671,6 +679,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		34481FAE19BE4E3E001748C2 /* NSString-HTML */ = {
+			isa = PBXGroup;
+			children = (
+				34481FAF19BE4E3E001748C2 /* NSString+HTML.h */,
+				34481FB019BE4E3E001748C2 /* NSString+HTML.m */,
+			);
+			path = "NSString-HTML";
+			sourceTree = "<group>";
+		};
 		349C67FD1958C5F000D25654 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
@@ -1210,6 +1227,7 @@
 		34F57FF919BB880E0050146E /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				34481FAE19BE4E3E001748C2 /* NSString-HTML */,
 				34F57FFA19BB880E0050146E /* SDWebImage */,
 			);
 			path = Vendor;
@@ -1279,6 +1297,8 @@
 				F58217E7192D00130014AE2E /* NSString+CBPWordPressExample.m */,
 				34A67F8919B8FD460021FF2E /* UIViewController+CBPWordPressExample.h */,
 				34A67F8A19B8FD460021FF2E /* UIViewController+CBPWordPressExample.m */,
+				34481FAB19BD890B001748C2 /* UIView+CBP.h */,
+				34481FAC19BD890B001748C2 /* UIView+CBP.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -1292,6 +1312,7 @@
 				349C67F61958AA7500D25654 /* Settings.bundle */,
 				34A67F9F19B900020021FF2E /* tag.snippet.html */,
 				F58217ED192D02F50014AE2E /* template.html */,
+				348DFB2619C3B14D004766DE /* Launch Screen.xib */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1419,6 +1440,7 @@
 				34F57F4919BB84180050146E /* 7@2x.png in Resources */,
 				34F57F9119BB84180050146E /* grouped_cell_single.png in Resources */,
 				34F57FB919BB84180050146E /* SSMessagesViewControllerInputBackground.png in Resources */,
+				348DFB2719C3B14D004766DE /* Launch Screen.xib in Resources */,
 				34F57FB119BB84180050146E /* slider track.png in Resources */,
 				34F57F9719BB84180050146E /* grouped_cell_top.png in Resources */,
 				34F57FAD19BB84180050146E /* share.png in Resources */,
@@ -1664,6 +1686,7 @@
 				34E6C1CE1909B5FB00F7B5BD /* CBPCommentDataSource.m in Sources */,
 				341C803319522B4D00070FD4 /* CBPTableViewController.m in Sources */,
 				349C67FC1958AC9200D25654 /* CBPSubmitTipViewController.m in Sources */,
+				34481FAD19BD890B001748C2 /* UIView+CBP.m in Sources */,
 				34A67F9C19B8FD580021FF2E /* CBPTextViewTableViewCell.m in Sources */,
 				347E285F190849B2004D3842 /* CBPCommentsViewController.m in Sources */,
 				34C2B86418EA0EF8002268BF /* CBPPostListViewController.m in Sources */,
@@ -1699,6 +1722,7 @@
 				34F5803119BB880E0050146E /* UIImageView+WebCache.m in Sources */,
 				34F5802819BB880E0050146E /* SDWebImageDownloader.m in Sources */,
 				34F5803219BB880E0050146E /* UIView+WebCacheOperation.m in Sources */,
+				34481FB219BE4E3E001748C2 /* NSString+HTML.m in Sources */,
 				34F5802C19BB880E0050146E /* UIButton+WebCache.m in Sources */,
 				34F5802319BB880E0050146E /* MKAnnotationView+WebCache.m in Sources */,
 				34F5802419BB880E0050146E /* NSData+ImageContentType.m in Sources */,
@@ -1783,6 +1807,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CODE_SIGN_FLAGS = "--deep";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1814,6 +1839,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				OTHER_CODE_SIGN_FLAGS = "--deep";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1846,6 +1872,7 @@
 					Analytics,
 					"$(PROJECT_DIR)/CBPWordPressExample/Vendor/ios-converser-sdk-1.8.2_RC2",
 				);
+				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -1879,6 +1906,7 @@
 					Analytics,
 					"$(PROJECT_DIR)/CBPWordPressExample/Vendor/ios-converser-sdk-1.8.2_RC2",
 				);
+				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -1940,6 +1968,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -1956,6 +1985,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};

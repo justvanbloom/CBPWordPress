@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment defaultVersion="1792" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="broadsheet_black" translatesAutoresizingMaskIntoConstraints="NO" id="IPQ-P4-DJT">
+                    <rect key="frame" x="142" y="358" width="196" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="4Q0-tf-dRM"/>
+                        <constraint firstAttribute="width" constant="196" id="Yku-2b-YcE"/>
+                    </constraints>
+                </imageView>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="post_default_image" translatesAutoresizingMaskIntoConstraints="NO" id="1SK-00-WGx">
+                    <rect key="frame" x="90" y="200" width="300" height="150"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="150" id="R7E-xk-48X"/>
+                        <constraint firstAttribute="width" constant="300" id="cQl-k6-N9a"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="R7E-xk-48X"/>
+                            <exclude reference="cQl-k6-N9a"/>
+                        </mask>
+                    </variation>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="centerX" secondItem="1SK-00-WGx" secondAttribute="centerX" id="03U-zq-evd"/>
+                <constraint firstItem="1SK-00-WGx" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="200" id="2y0-Db-dvo"/>
+                <constraint firstItem="IPQ-P4-DJT" firstAttribute="top" secondItem="1SK-00-WGx" secondAttribute="bottom" constant="8" symbolic="YES" id="4Ea-WI-hTG"/>
+                <constraint firstItem="IPQ-P4-DJT" firstAttribute="top" secondItem="1SK-00-WGx" secondAttribute="bottom" constant="8" symbolic="YES" id="Gls-pb-ALx"/>
+                <constraint firstAttribute="centerX" secondItem="IPQ-P4-DJT" secondAttribute="centerX" id="ens-38-ScB"/>
+                <constraint firstItem="1SK-00-WGx" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="h9B-kL-hlj"/>
+                <constraint firstItem="1SK-00-WGx" firstAttribute="centerX" secondItem="IPQ-P4-DJT" secondAttribute="centerX" id="qWh-9K-zOZ"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="h9B-kL-hlj"/>
+                    <exclude reference="qWh-9K-zOZ"/>
+                    <exclude reference="4Ea-WI-hTG"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="404" y="445"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="broadsheet_black" width="196" height="40"/>
+        <image name="post_default_image" width="300" height="150"/>
+    </resources>
+</document>
