@@ -3,12 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "default-post-image.png"
+      "filename" : "post_default_image.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "default-post-image@2x.png"
+      "filename" : "post_default_image@2x.png"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x",
+      "filename" : "post_default_image@3x.png"
     }
   ],
   "info" : {
