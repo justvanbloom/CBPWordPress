@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Crayons and Brown Paper. All rights reserved.
 //
 
+#import "UIView+CBP.h"
+
 #import "TTTAttributedLabel.h"
 #import "UIImageView+AFNetworking.h"
 
@@ -240,6 +242,8 @@ static NSDateFormatter *commentDateFormatter = nil;
         _avatarImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"default_avatar_image"]];
         _avatarImageView.translatesAutoresizingMaskIntoConstraints = NO;
         _avatarImageView.contentMode = UIViewContentModeScaleAspectFit;
+        
+        [_avatarImageView layoutDebugIdentifier:@"_avatarImageView"];
     }
     
     return _avatarImageView;
@@ -254,6 +258,8 @@ static NSDateFormatter *commentDateFormatter = nil;
         _commentatorLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
         [_commentatorLabel setContentCompressionResistancePriority:250
                                                            forAxis:UILayoutConstraintAxisHorizontal];
+        
+        [_commentatorLabel layoutDebugIdentifier:@"_commentatorLabel"];
     }
     
     return _commentatorLabel;
@@ -267,6 +273,8 @@ static NSDateFormatter *commentDateFormatter = nil;
         _commentDateLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
         [_commentDateLabel setContentCompressionResistancePriority:250
                                                            forAxis:UILayoutConstraintAxisHorizontal];
+        
+        [_commentDateLabel layoutDebugIdentifier:@"_commentDateLabel"];
     }
     
     return _commentDateLabel;
@@ -321,6 +329,8 @@ static NSDateFormatter *commentDateFormatter = nil;
         
         [self.contentView addSubview:_commentHeaderView];
         
+        [_commentHeaderView layoutDebugIdentifier:@"_commentHeaderView"];
+        
         
     }
     
@@ -337,6 +347,8 @@ static NSDateFormatter *commentDateFormatter = nil;
         _commentLabel.enabledTextCheckingTypes = NSTextCheckingTypeLink;
         
         [self.contentView addSubview:_commentLabel];
+        
+        [_commentLabel layoutDebugIdentifier:@"_commentLabel"];
     }
     
     return _commentLabel;
@@ -350,6 +362,8 @@ static NSDateFormatter *commentDateFormatter = nil;
         _level1.backgroundColor = [UIColor colorWithRed:0.964f green:0.964f blue:0.964f alpha:1.0f];
         
         [self.contentView addSubview:_level1];
+        
+        [_level1 layoutDebugIdentifier:@"_level1"];
     }
     
     return _level1;
@@ -363,6 +377,8 @@ static NSDateFormatter *commentDateFormatter = nil;
         _level2.backgroundColor = [UIColor colorWithRed:0.867f green:0.867f blue:0.867f alpha:1.0f];
         
         [self.contentView addSubview:_level2];
+        
+        [_level2 layoutDebugIdentifier:@"_level2"];
     }
     
     return _level2;
@@ -376,6 +392,8 @@ static NSDateFormatter *commentDateFormatter = nil;
         _level3.backgroundColor = [UIColor colorWithRed:0.774f green:0.774f blue:0.774f alpha:1.0f];
         
         [self.contentView addSubview:_level3];
+        
+        [_level3 layoutDebugIdentifier:@"_level3"];
     }
     
     return _level3;
@@ -389,6 +407,8 @@ static NSDateFormatter *commentDateFormatter = nil;
         _level4.backgroundColor = [UIColor colorWithRed:0.664f green:0.664f blue:0.664f alpha:1.0f];
         
         [self.contentView addSubview:_level4];
+        
+        [_level4 layoutDebugIdentifier:@"_level4"];
     }
     
     return _level4;
@@ -406,6 +426,8 @@ static NSDateFormatter *commentDateFormatter = nil;
                                                       forAxis:UILayoutConstraintAxisHorizontal];
         [_replyButton setTitle:NSLocalizedString(@"Reply", nil) forState:UIControlStateNormal];
         [_replyButton sizeToFit];
+        
+        [_replyButton layoutDebugIdentifier:@"_replyButton"];
     }
     
     return _replyButton;
