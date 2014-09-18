@@ -1,10 +1,11 @@
 pod "CBPWordPress", :path => "../CBPWordPress.podspec"
+pod 'googleplus-ios-sdk', '~> 1.7'
+pod 'GooglePlusShareActivity', '~> 0.2'
 pod 'TOWebViewController', '~> 2.0.5'
 pod 'NSString-HTML', '~> 0.0'
 pod 'MHVideoPhotoGallery', '~> 1.6'
 pod 'SVPullToRefresh', :head
 pod 'SORelativeDateTransformer', '~> 1.1'
-pod 'GooglePlusShareActivity', '~> 0.2'
 pod 'HTAutocompleteTextField', '~> 1.2'
 pod 'BButton', '~> 4.0'
 pod 'SAMTextView', '~> 0.2'
