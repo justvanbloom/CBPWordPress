@@ -42,19 +42,7 @@
                                                                         views:@{@"tableView": self.tableView}]];
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    
-    [self.dataSource loadPosts:2 completion:^(NSError *error) {
-        if (!error) {
-            [self updateTableView];
-        } else {
-            NSLog(@"Download error: %@", error);
-        }
-    }];
-}
-
+#pragma mark - NCWidgetProviding
 - (void)widgetPerformUpdateWithCompletionHandler:(void (^)(NCUpdateResult))completionHandler {
     [self.dataSource loadPosts:2 completion:^(NSError *error) {
         NCUpdateResult result = NCUpdateResultNoData;
@@ -70,6 +58,11 @@
         
         completionHandler(result);
     }];
+}
+
+- (UIEdgeInsets)widgetMarginInsetsForProposedMarginInsets:(UIEdgeInsets)defaultMarginInsets
+{
+    return UIEdgeInsetsMake(defaultMarginInsets.top, 16.0f, defaultMarginInsets.bottom, 16.0f);
 }
 
 #pragma mark -
