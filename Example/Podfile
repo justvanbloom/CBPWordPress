@@ -1,5 +1,4 @@
 pod "CBPWordPress", :path => "../CBPWordPress.podspec"
-pod 'googleplus-ios-sdk', '~> 1.7'
 pod 'GooglePlusShareActivity', '~> 0.2'
 pod 'TOWebViewController', '~> 2.0.5'
 pod 'NSString-HTML', '~> 0.0'
