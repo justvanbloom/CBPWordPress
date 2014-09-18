@@ -5,7 +5,7 @@
 //  Created by Karl Monaghan on 22/04/2014.
 //  Copyright (c) 2014 Crayons and Brown Paper. All rights reserved.
 //
-
+#import <Crashlytics/Crashlytics.h>
 #import <AVFoundation/AVFoundation.h>
 #import "DFPBannerView.h"
 #import "NSString+CBPWordPressExample.h"
@@ -168,7 +168,8 @@ static NSString * const kFrameString = @"frame";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    if (self.post) {
+    if (self.post && self.post.title && self.post.content) {
+        CLSNSLog(@"Have been give a post to display: %d", (long)self.post.postId);
         [self displayPost];
     } else if (self.url) {
         [self loadPost];
@@ -293,6 +294,7 @@ static NSString * const kFrameString = @"frame";
                                          if (strongSelf.dataSource && (strongSelf.index >= [strongSelf.dataSource.posts count])) {
                                              [strongSelf.dataSource addPost:post];
                                          }
+                                         CLSNSLog(@"Have fetched a post from a URL: %@", strongSelf.url);
                                          
                                          [strongSelf displayPost];
                                      } else {
@@ -317,6 +319,8 @@ static NSString * const kFrameString = @"frame";
                                              [strongSelf.dataSource addPost:post];
                                          }
                                          
+                                         CLSNSLog(@"Have remote fetched a post from a post id: %d", (long)strongSelf.postId);
+                                         
                                          [strongSelf displayPost];
                                      } else {
                                          //NSLog(@"Error: %@", error);
@@ -332,6 +336,8 @@ static NSString * const kFrameString = @"frame";
         
         self.post = [self.dataSource postAtIndex:self.index];
         
+        CLSNSLog(@"Loading next post");
+        
         [self displayPost];
     }
 }
@@ -343,6 +349,8 @@ static NSString * const kFrameString = @"frame";
         
         if (self.index < [self.dataSource.posts count]) {
             self.post = [self.dataSource postAtIndex:self.index];
+            
+            CLSNSLog(@"Loading previous post");
             
             [self displayPost];
         } else if (self.post.previousURL) {
