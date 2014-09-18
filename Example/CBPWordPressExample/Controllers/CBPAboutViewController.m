@@ -48,20 +48,12 @@
     
     [[GAI sharedInstance].defaultTracker set:kGAIScreenName
                                        value:@"About Screen"];
+    
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)dealloc
 {
-    [super viewWillAppear:animated];
-    
-    self.converser.delegate = self;
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    self.converser.delegate = nil;
+    _converser.delegate = nil;
 }
 
 #pragma mark -
