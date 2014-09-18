@@ -169,7 +169,7 @@ static NSString * const kFrameString = @"frame";
     // Do any additional setup after loading the view.
     
     if (self.post && self.post.title && self.post.content) {
-        CLSNSLog(@"Have been give a post to display: %d", (long)self.post.postId);
+        CLSNSLog(@"Have been give a post to display: %ld", (long)self.post.postId);
         [self displayPost];
     } else if (self.url) {
         [self loadPost];
@@ -319,7 +319,7 @@ static NSString * const kFrameString = @"frame";
                                              [strongSelf.dataSource addPost:post];
                                          }
                                          
-                                         CLSNSLog(@"Have remote fetched a post from a post id: %d", (long)strongSelf.postId);
+                                         CLSNSLog(@"Have remote fetched a post from a post id: %ld", (long)strongSelf.postId);
                                          
                                          [strongSelf displayPost];
                                      } else {
