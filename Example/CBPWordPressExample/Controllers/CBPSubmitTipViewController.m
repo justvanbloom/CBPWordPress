@@ -163,7 +163,7 @@ UITextViewDelegate>
     
     __weak typeof(self) weakSelf = self;
     
-    AFHTTPRequestOperation *op = [manager POST:@"/iphone_tip_karl.php"
+    AFHTTPRequestOperation *op = [manager POST:@"/iphone_tip.php"
                                     parameters:@{@"name": self.nameTextField.text,
                                                  @"email": self.emailTextField.text,
                                                  @"message": self.messageTextView.text}
