@@ -1866,10 +1866,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/CBPWordPressExample/Vendor/GoogleAnalyticsServicesiOS",
 					"$(PROJECT_DIR)/CBPWordPressExample/Vendor/GoogleMobileAdsSdkiOS",
-					"$(PROJECT_DIR)/CBPWordPressExample/ios-converser-sdk-1.7.2",
-					"$(PROJECT_DIR)/CBPWordPressExample/ios-converser-sdk-1.8.2_RC2",
-					"$(PROJECT_DIR)/CBPWordPressExample/Vendor/Google",
-					Analytics,
 					"$(PROJECT_DIR)/CBPWordPressExample/Vendor/ios-converser-sdk-1.8.2_RC2",
 				);
 				OTHER_CODE_SIGN_FLAGS = "--deep";
@@ -1900,10 +1896,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/CBPWordPressExample/Vendor/GoogleAnalyticsServicesiOS",
 					"$(PROJECT_DIR)/CBPWordPressExample/Vendor/GoogleMobileAdsSdkiOS",
-					"$(PROJECT_DIR)/CBPWordPressExample/ios-converser-sdk-1.7.2",
-					"$(PROJECT_DIR)/CBPWordPressExample/ios-converser-sdk-1.8.2_RC2",
-					"$(PROJECT_DIR)/CBPWordPressExample/Vendor/Google",
-					Analytics,
 					"$(PROJECT_DIR)/CBPWordPressExample/Vendor/ios-converser-sdk-1.8.2_RC2",
 				);
 				OTHER_CODE_SIGN_FLAGS = "--deep";
