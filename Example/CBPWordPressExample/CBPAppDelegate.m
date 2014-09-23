@@ -148,6 +148,18 @@
 - (void)setupNotification
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+    if (![defaults boolForKey:@"removed_notification"]) {
+        [[UIApplication sharedApplication] cancelAllLocalNotifications];
+        
+        [defaults removeObjectForKey:CBPLocalNotifcation];
+        
+        [defaults setBool:YES forKey:@"removed_notification"];
+        
+        [defaults synchronize];
+        
+        return;
+    }
     
     if ([defaults boolForKey:CBPLocalNotifcation]) {
         return;
