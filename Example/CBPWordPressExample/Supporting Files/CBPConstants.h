@@ -14,6 +14,7 @@ static NSString * const CBPCommenterURL = @"comment_url";
 static NSString * const CBPDailyReminder = @"daily_reminder";
 static NSString * const CBPImageURL = @"cf.broadsheet.ie";
 static NSString * const CBPLastHeaderUpdate = @"last_header_update";
+static NSString * const CBPLockRotation = @"lock_rotation";
 static NSString * const CBPFirstTime = @"first_time";
 static NSString * const CBPLocalNotifcation = @"local_notification";
 static NSString * const CBPSiteURL = @"broadsheet.ie";

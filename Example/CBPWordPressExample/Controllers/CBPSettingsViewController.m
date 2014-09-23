@@ -23,6 +23,7 @@ static NSString * const CBPSwitchTableViewCellIdentifier = @"CBPSwitchTableViewC
 @property (nonatomic) UISwitch *backgroundSwitch;
 @property (nonatomic) HTAutocompleteTextField *emailTextField;
 @property (nonatomic) UIView *footerView;
+@property (nonatomic) UISwitch *lockRotationSwitch;
 @property (nonatomic) UITextField *nameTextField;
 @property (nonatomic) UISwitch *reminderSwitch;
 @property (nonatomic) BButton *saveButton;
@@ -63,11 +64,13 @@ static NSString * const CBPSwitchTableViewCellIdentifier = @"CBPSwitchTableViewC
     
     self.backgroundSwitch = [UISwitch new];
     self.reminderSwitch = [UISwitch new];
+    self.lockRotationSwitch = [UISwitch new];
     self.systemFontSwitch = [UISwitch new];
     [self.systemFontSwitch addTarget:self action:@selector(systemFontValueChanged) forControlEvents:UIControlEventValueChanged];
     
     self.backgroundSwitch.on = [defaults boolForKey:CBPBackgroundUpdate];
     self.reminderSwitch.on = [defaults boolForKey:CBPDailyReminder];
+    self.lockRotationSwitch.on = [defaults boolForKey:CBPLockRotation];
     self.systemFontSwitch.on = ([defaults floatForKey:CBPUserFontSize]) ? NO : YES;
     
     self.userFontSizeSlider.value = ([defaults floatForKey:CBPUserFontSize])? [defaults floatForKey:CBPUserFontSize] : CBPMinimumFontSize;
@@ -110,6 +113,8 @@ static NSString * const CBPSwitchTableViewCellIdentifier = @"CBPSwitchTableViewC
         [defaults removeObjectForKey:CBPLocalNotifcation];
     }
     
+    [defaults setBool:self.lockRotationSwitch.on forKey:CBPLockRotation];
+    
     [defaults setBool:self.reminderSwitch.on forKey:CBPDailyReminder];
     
     if (self.systemFontSwitch.on) {
@@ -128,14 +133,14 @@ static NSString * const CBPSwitchTableViewCellIdentifier = @"CBPSwitchTableViewC
     [self.tableView beginUpdates];
     
     if (self.systemFontSwitch.on) {
-        [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:3 inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
+        [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:4 inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
     } else {
-        [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:3 inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
+        [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:4 inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
     }
     [self.tableView endUpdates];
 
     if (!self.systemFontSwitch.on) {
-        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:1] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:4 inSection:1] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }
 }
 
@@ -154,7 +159,7 @@ static NSString * const CBPSwitchTableViewCellIdentifier = @"CBPSwitchTableViewC
             return 3;
             break;
         case 1:
-            return (self.systemFontSwitch.on) ? 3 : 4;
+            return (self.systemFontSwitch.on) ? 4 : 5;
             break;
         default:
             break;
@@ -203,7 +208,7 @@ static NSString * const CBPSwitchTableViewCellIdentifier = @"CBPSwitchTableViewC
         return cell;
     } else if (indexPath.section == 1) {
         
-        if (indexPath.row == 3) {
+        if (indexPath.row == 4) {
             CBPSliderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CBPSliderTableViewCellIdentifier];
             cell.slider = self.userFontSizeSlider;
             
@@ -232,6 +237,12 @@ static NSString * const CBPSwitchTableViewCellIdentifier = @"CBPSwitchTableViewC
                 break;
             case 2:
             {
+                cell.textLabel.text = NSLocalizedString(@"Lock Rotation", nil);
+                cell.accessoryView = self.lockRotationSwitch;
+            }
+                break;
+            case 3:
+            {
                 cell.textLabel.text = NSLocalizedString(@"Use iOS dynamic font sizes", nil);
                 cell.accessoryView = self.systemFontSwitch;
             }
@@ -249,7 +260,7 @@ static NSString * const CBPSwitchTableViewCellIdentifier = @"CBPSwitchTableViewC
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-    if ((indexPath.section == 1) && (indexPath.row == 3)) {
+    if ((indexPath.section == 1) && (indexPath.row == 4)) {
         return CBPSliderTableViewCellHeight;
     }
     
