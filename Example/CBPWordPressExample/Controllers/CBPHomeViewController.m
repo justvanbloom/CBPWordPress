@@ -169,6 +169,8 @@
 
 - (void)openPost:(NSInteger)postId
 {
+    [self dismissViewControllerAnimated:NO completion:nil];
+    
     UIViewController *vc = [[CBPPostViewController alloc] initWithPostId:postId];
     
     [self.navigationController pushViewController:vc animated:YES];
@@ -176,6 +178,8 @@
 
 - (void)openURL:(NSURL *)url
 {
+    [self dismissViewControllerAnimated:NO completion:nil];
+    
     UIViewController *vc;
     
     if ([[url host] hasSuffix:@"author"]) {
