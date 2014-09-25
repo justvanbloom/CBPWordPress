@@ -84,8 +84,11 @@
                                              selector:@selector(willEnterForeground)
                                                  name:UIApplicationWillEnterForegroundNotification
                                                object:nil];
-    
-    [self.dfpInterstitial loadRequest:[GADRequest request]];
+    GADRequest *request =[GADRequest request];
+#if TARGET_IPHONE_SIMULATOR
+    request.testDevices = @[ @"Simulator" ];
+#endif
+    [self.dfpInterstitial loadRequest:request];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -324,7 +327,11 @@
 {
     self.dfpInterstitial = nil;
     
-    [self.dfpInterstitial loadRequest:[GADRequest request]];
+    GADRequest *request =[GADRequest request];
+#if TARGET_IPHONE_SIMULATOR
+    request.testDevices = @[ @"Simulator" ];
+#endif
+    [self.dfpInterstitial loadRequest:request];
 }
 
 #pragma mark - UIScrollViewDelegate
