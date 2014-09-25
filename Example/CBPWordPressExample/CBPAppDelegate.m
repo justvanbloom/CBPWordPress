@@ -88,6 +88,8 @@
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {        
     if ([[url host] hasSuffix:CBPSiteURL]) {
+        [self.navigationController popToRootViewControllerAnimated:NO];
+        
         [self.viewController openURL:url];
         
         [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"
@@ -97,6 +99,8 @@
         
         return YES;
     } else if ([[url scheme] isEqualToString:@"BroadsheetIe"]) {
+        [self.navigationController popToRootViewControllerAnimated:NO];
+        
         [self.viewController openPost:[[url host] integerValue]];
         
         [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"

@@ -42,6 +42,19 @@
                                                                         views:@{@"tableView": self.tableView}]];
 }
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+
+    [self.dataSource loadPosts:2 completion:^(NSError *error) {
+        if (!error) {
+            [self updateTableView];
+        } else {
+            NSLog(@"Download error: %@", error);
+        }
+    }];
+}
+
 #pragma mark - NCWidgetProviding
 - (void)widgetPerformUpdateWithCompletionHandler:(void (^)(NCUpdateResult))completionHandler {
     [self.dataSource loadPosts:2 completion:^(NSError *error) {
@@ -77,11 +90,11 @@
             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
         } else {
             if (self.dataSource.firstItemStatus == CBPTodayDataSourceItemDifferent) {
-                [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationLeft];
+                [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
             }
             
             if (self.dataSource.secondItemStatus == CBPTodayDataSourceItemDifferent) {
-                [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:0]] withRowAnimation:UITableViewRowAnimationLeft];
+                [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
                 
             }
         }

@@ -30,6 +30,8 @@ static const CGFloat CBPTodayImageHeight = 60.0;
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         [self setNeedsUpdateConstraints];
     }
     return self;
