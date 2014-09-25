@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CBPTableViewController : UIViewController <UITableViewDelegate>
+@interface CBPTableViewController : CBPViewController <UITableViewDelegate>
 @property (nonatomic) NSString *dfpAdUnit;
 @property (nonatomic, assign) BOOL canInfiniteLoad;
 @property (nonatomic, assign) BOOL canLoadMore;

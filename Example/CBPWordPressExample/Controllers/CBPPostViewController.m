@@ -269,6 +269,10 @@ static NSString * const kFrameString = @"frame";
 #pragma mark -
 - (void)displayPost
 {
+    if (!self.post) {
+        return;
+    }
+    
     [self.webView loadHTMLString:[NSString cbp_HTMLStringFor:self.post withFontSize:self.baseFontSize]
                          baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
     
@@ -426,7 +430,7 @@ static NSString * const kFrameString = @"frame";
     CBPComposeCommentViewController *vc = [[CBPComposeCommentViewController alloc] initWithPostId:self.post.postId
                                                                               withCompletionBlock:block];
     
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:vc];
+    CBPNavigationController *navController = [[CBPNavigationController alloc] initWithRootViewController:vc];
     
     [self presentViewController:navController animated:YES
                      completion:^(){
@@ -457,6 +461,10 @@ static NSString * const kFrameString = @"frame";
 
 - (void)showGallery:(NSString *)uri
 {
+    if (![self.post.attachments count]) {
+        return;
+    }
+    
     NSUInteger index = [self.post.attachments indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
         if ([[(CBPWordPressAttachment *)obj url] isEqualToString:uri]) {
             *stop = YES;

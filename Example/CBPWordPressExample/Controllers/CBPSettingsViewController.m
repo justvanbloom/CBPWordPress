@@ -79,6 +79,18 @@ static NSString * const CBPSwitchTableViewCellIdentifier = @"CBPSwitchTableViewC
                                        value:@"Settings Screen"];
 }
 
+- (BOOL)shouldAutorotate {
+    return ![[NSUserDefaults standardUserDefaults] boolForKey:CBPLockRotation];
+}
+
+- (NSUInteger)supportedInterfaceOrientations{
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:CBPLockRotation]) {
+        return UIInterfaceOrientationPortrait;
+    }
+    
+    return UIInterfaceOrientationMaskAllButUpsideDown;
+}
+
 #pragma mark -
 - (void)saveAction:(id)sender
 {

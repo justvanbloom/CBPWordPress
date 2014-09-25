@@ -15,6 +15,7 @@
 #import "CBPAppDelegate.h"
 
 #import "CBPHomeViewController.h"
+#import "CBPNavigationController.h"
 #import "CBPWordPressAPIClient.h"
 
 @interface CBPAppDelegate()
@@ -30,7 +31,7 @@
                                                            
     self.viewController = [CBPHomeViewController new];
     
-    self.navigationController = [[UINavigationController alloc] initWithRootViewController:self.viewController];
+    self.navigationController = [[CBPNavigationController alloc] initWithRootViewController:self.viewController];
     self.navigationController.navigationBar.tintColor = [UIColor darkGrayColor];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -128,6 +129,15 @@
                                                                                         action:@"notification"
                                                                                          label:@"opened_from_local"
                                                                                          value:nil] build]];
+}
+
+- (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
+{
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:CBPLockRotation]) {
+        return UIInterfaceOrientationPortrait;
+    }
+    
+    return UIInterfaceOrientationMaskAllButUpsideDown;
 }
 
 #pragma mark -

@@ -142,7 +142,7 @@
 {
     CBPAboutViewController *vc = [[CBPAboutViewController alloc] initWithStyle:UITableViewStyleGrouped];
     
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:vc];
+    CBPNavigationController *navController = [[CBPNavigationController alloc] initWithRootViewController:vc];
     
     [self.navigationController presentViewController:navController
                                             animated:YES
@@ -194,7 +194,7 @@
 {
     CBPSubmitTipViewController *vc = [[CBPSubmitTipViewController alloc] initWithStyle:UITableViewStyleGrouped];
 
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:vc];
+    CBPNavigationController *navController = [[CBPNavigationController alloc] initWithRootViewController:vc];
     
     [self.navigationController presentViewController:navController
                                             animated:YES

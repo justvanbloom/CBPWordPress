@@ -11,7 +11,7 @@
 @class CBPWordPressPost;
 @class CBPWordPressDataSource;
 
-@interface CBPPostViewController : UIViewController
+@interface CBPPostViewController : CBPViewController
 - (instancetype)initWithPost:(CBPWordPressPost *)post;
 - (instancetype)initWithPostId:(NSInteger)postId;
 - (instancetype)initWithPost:(CBPWordPressPost *)post withDataSource:(CBPWordPressDataSource *)dataSource withIndex:(NSInteger)index;

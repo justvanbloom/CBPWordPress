@@ -190,7 +190,7 @@
                                                                                       withComment:replyComment
                                                                               withCompletionBlock:block];
     
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:vc];
+    CBPNavigationController *navController = [[CBPNavigationController alloc] initWithRootViewController:vc];
     
     [self presentViewController:navController animated:YES completion:nil];
 }

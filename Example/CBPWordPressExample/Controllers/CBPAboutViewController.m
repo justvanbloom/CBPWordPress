@@ -51,9 +51,28 @@
     
 }
 
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    self.converser.delegate = nil;
+}
+
 - (void)dealloc
 {
     _converser.delegate = nil;
+}
+
+- (BOOL)shouldAutorotate {
+    return ![[NSUserDefaults standardUserDefaults] boolForKey:CBPLockRotation];
+}
+
+- (NSUInteger)supportedInterfaceOrientations{
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:CBPLockRotation]) {
+        return UIInterfaceOrientationPortrait;
+    }
+    
+    return UIInterfaceOrientationMaskAllButUpsideDown;
 }
 
 #pragma mark -
@@ -259,7 +278,7 @@
                 {
                     CBPSubmitTipViewController *vc = [[CBPSubmitTipViewController alloc] initWithStyle:UITableViewStyleGrouped];
                     
-                    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:vc];
+                    CBPNavigationController *navController = [[CBPNavigationController alloc] initWithRootViewController:vc];
                     
                     [self.navigationController presentViewController:navController
                                                             animated:YES

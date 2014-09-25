@@ -45,11 +45,6 @@
 		34D3693E18E709AF00E14526 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34D3693D18E709AF00E14526 /* UIKit.framework */; };
 		34D3694A18E709AF00E14526 /* CBPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 34D3694918E709AF00E14526 /* CBPAppDelegate.m */; };
 		34D3695218E709AF00E14526 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34D3695118E709AF00E14526 /* Images.xcassets */; };
-		34D3695918E709AF00E14526 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34D3695818E709AF00E14526 /* XCTest.framework */; };
-		34D3695A18E709AF00E14526 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34D3693918E709AF00E14526 /* Foundation.framework */; };
-		34D3695B18E709AF00E14526 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34D3693D18E709AF00E14526 /* UIKit.framework */; };
-		34D3696318E709AF00E14526 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 34D3696118E709AF00E14526 /* InfoPlist.strings */; };
-		34D3696518E709AF00E14526 /* CBPWordPressExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 34D3696418E709AF00E14526 /* CBPWordPressExampleTests.m */; };
 		34E31C5B1953727E00604A39 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34E31C5A1953727E00604A39 /* AVFoundation.framework */; };
 		34E6C1CE1909B5FB00F7B5BD /* CBPCommentDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 34E6C1CD1909B5FB00F7B5BD /* CBPCommentDataSource.m */; };
 		34F57BCC19BB81B50050146E /* libAdIdAccess.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34F57B5C19BB81B50050146E /* libAdIdAccess.a */; };
@@ -244,16 +239,11 @@
 		F58217E8192D00130014AE2E /* NSString+CBPWordPressExample.m in Sources */ = {isa = PBXBuildFile; fileRef = F58217E7192D00130014AE2E /* NSString+CBPWordPressExample.m */; };
 		F58217EC192D02CB0014AE2E /* default.css in Resources */ = {isa = PBXBuildFile; fileRef = F58217EB192D02CB0014AE2E /* default.css */; };
 		F58217EE192D02F50014AE2E /* template.html in Resources */ = {isa = PBXBuildFile; fileRef = F58217ED192D02F50014AE2E /* template.html */; };
+		F5C5EA9419D474AC005D0FCF /* CBPNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C5EA9319D474AC005D0FCF /* CBPNavigationController.m */; };
+		F5C5EA9819D47841005D0FCF /* CBPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C5EA9719D47841005D0FCF /* CBPViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		34D3695C18E709AF00E14526 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 34D3692E18E709AF00E14526 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 34D3693518E709AF00E14526;
-			remoteInfo = CBPWordPressExample;
-		};
 		34F57FE819BB86900050146E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 34D3692E18E709AF00E14526 /* Project object */;
@@ -360,7 +350,6 @@
 		34D3694818E709AF00E14526 /* CBPAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CBPAppDelegate.h; sourceTree = "<group>"; };
 		34D3694918E709AF00E14526 /* CBPAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CBPAppDelegate.m; sourceTree = "<group>"; };
 		34D3695118E709AF00E14526 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		34D3695718E709AF00E14526 /* CBPWordPressExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CBPWordPressExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		34D3695818E709AF00E14526 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		34D3696018E709AF00E14526 /* CBPWordPressExampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CBPWordPressExampleTests-Info.plist"; sourceTree = "<group>"; };
 		34D3696218E709AF00E14526 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -631,6 +620,10 @@
 		F58217E7192D00130014AE2E /* NSString+CBPWordPressExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CBPWordPressExample.m"; sourceTree = "<group>"; };
 		F58217EB192D02CB0014AE2E /* default.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = default.css; sourceTree = "<group>"; };
 		F58217ED192D02F50014AE2E /* template.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = template.html; sourceTree = "<group>"; };
+		F5C5EA9219D474AC005D0FCF /* CBPNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CBPNavigationController.h; path = Classes/CBPNavigationController.h; sourceTree = "<group>"; };
+		F5C5EA9319D474AC005D0FCF /* CBPNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CBPNavigationController.m; path = Classes/CBPNavigationController.m; sourceTree = "<group>"; };
+		F5C5EA9619D47841005D0FCF /* CBPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBPViewController.h; sourceTree = "<group>"; };
+		F5C5EA9719D47841005D0FCF /* CBPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBPViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -655,16 +648,6 @@
 				34D3693A18E709AF00E14526 /* Foundation.framework in Frameworks */,
 				34446FE7197D9DC500166229 /* Crashlytics.framework in Frameworks */,
 				C67A29DDF4CD4FD1B3280908 /* libPods.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		34D3695418E709AF00E14526 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				34D3695918E709AF00E14526 /* XCTest.framework in Frameworks */,
-				34D3695B18E709AF00E14526 /* UIKit.framework in Frameworks */,
-				34D3695A18E709AF00E14526 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -752,6 +735,8 @@
 				3417327719070AA000DAAE85 /* CBPPostViewController.m */,
 				341C803119522B4D00070FD4 /* CBPTableViewController.h */,
 				341C803219522B4D00070FD4 /* CBPTableViewController.m */,
+				F5C5EA9619D47841005D0FCF /* CBPViewController.h */,
+				F5C5EA9719D47841005D0FCF /* CBPViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -801,7 +786,6 @@
 			isa = PBXGroup;
 			children = (
 				34D3693618E709AF00E14526 /* CBPWordPressExample.app */,
-				34D3695718E709AF00E14526 /* CBPWordPressExampleTests.xctest */,
 				34F57FDE19BB86900050146E /* BroadsheetTodayExtension.appex */,
 			);
 			name = Products;
@@ -835,6 +819,7 @@
 				F58217E5192CFFE70014AE2E /* Categories */,
 				34D3694818E709AF00E14526 /* CBPAppDelegate.h */,
 				34D3694918E709AF00E14526 /* CBPAppDelegate.m */,
+				F5C5EA9519D474D4005D0FCF /* Classes */,
 				34C2B86118EA0EF8002268BF /* Controllers */,
 				34C2B86518EA0FE2002268BF /* DataSource */,
 				34D3695118E709AF00E14526 /* Images.xcassets */,
@@ -1317,6 +1302,15 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		F5C5EA9519D474D4005D0FCF /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				F5C5EA9219D474AC005D0FCF /* CBPNavigationController.h */,
+				F5C5EA9319D474AC005D0FCF /* CBPNavigationController.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1343,24 +1337,6 @@
 			productName = CBPWordPressExample;
 			productReference = 34D3693618E709AF00E14526 /* CBPWordPressExample.app */;
 			productType = "com.apple.product-type.application";
-		};
-		34D3695618E709AF00E14526 /* CBPWordPressExampleTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 34D3696B18E709AF00E14526 /* Build configuration list for PBXNativeTarget "CBPWordPressExampleTests" */;
-			buildPhases = (
-				34D3695318E709AF00E14526 /* Sources */,
-				34D3695418E709AF00E14526 /* Frameworks */,
-				34D3695518E709AF00E14526 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				34D3695D18E709AF00E14526 /* PBXTargetDependency */,
-			);
-			name = CBPWordPressExampleTests;
-			productName = CBPWordPressExampleTests;
-			productReference = 34D3695718E709AF00E14526 /* CBPWordPressExampleTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		34F57FDD19BB86900050146E /* BroadsheetTodayExtension */ = {
 			isa = PBXNativeTarget;
@@ -1397,9 +1373,6 @@
 							};
 						};
 					};
-					34D3695618E709AF00E14526 = {
-						TestTargetID = 34D3693518E709AF00E14526;
-					};
 					34F57FDD19BB86900050146E = {
 						CreatedOnToolsVersion = 6.0;
 						DevelopmentTeam = 733QMTEL36;
@@ -1420,7 +1393,6 @@
 			projectRoot = "";
 			targets = (
 				34D3693518E709AF00E14526 /* CBPWordPressExample */,
-				34D3695618E709AF00E14526 /* CBPWordPressExampleTests */,
 				34F57FDD19BB86900050146E /* BroadsheetTodayExtension */,
 			);
 		};
@@ -1604,14 +1576,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		34D3695518E709AF00E14526 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				34D3696318E709AF00E14526 /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		34F57FDC19BB86900050146E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1691,16 +1655,10 @@
 				347E285F190849B2004D3842 /* CBPCommentsViewController.m in Sources */,
 				34C2B86418EA0EF8002268BF /* CBPPostListViewController.m in Sources */,
 				34BC742B195A128300C162E8 /* CBPAboutViewController.m in Sources */,
+				F5C5EA9819D47841005D0FCF /* CBPViewController.m in Sources */,
 				349C67F51956254500D25654 /* CBPHomeViewController.m in Sources */,
 				34A67F9819B8FD580021FF2E /* CBPCommentTableViewCell.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		34D3695318E709AF00E14526 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				34D3696518E709AF00E14526 /* CBPWordPressExampleTests.m in Sources */,
+				F5C5EA9419D474AC005D0FCF /* CBPNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1736,11 +1694,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		34D3695D18E709AF00E14526 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 34D3693518E709AF00E14526 /* CBPWordPressExample */;
-			targetProxy = 34D3695C18E709AF00E14526 /* PBXContainerItemProxy */;
-		};
 		34F57FE919BB86900050146E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 34F57FDD19BB86900050146E /* BroadsheetTodayExtension */;
@@ -1805,7 +1758,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				SDKROOT = iphoneos;
@@ -1838,7 +1791,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -1905,46 +1858,6 @@
 			};
 			name = Release;
 		};
-		34D3696C18E709AF00E14526 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CBPWordPressExample.app/CBPWordPressExample";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CBPWordPressExample/Supporting Files/CBPWordPressExample-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "CBPWordPressExampleTests/CBPWordPressExampleTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		34D3696D18E709AF00E14526 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CBPWordPressExample.app/CBPWordPressExample";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CBPWordPressExample/Supporting Files/CBPWordPressExample-Prefix.pch";
-				INFOPLIST_FILE = "CBPWordPressExampleTests/CBPWordPressExampleTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 		34F57FEE19BB86900050146E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2000,15 +1913,6 @@
 			buildConfigurations = (
 				34D3696918E709AF00E14526 /* Debug */,
 				34D3696A18E709AF00E14526 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		34D3696B18E709AF00E14526 /* Build configuration list for PBXNativeTarget "CBPWordPressExampleTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				34D3696C18E709AF00E14526 /* Debug */,
-				34D3696D18E709AF00E14526 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

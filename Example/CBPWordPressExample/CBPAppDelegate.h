@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class CBPNavigationController;
+
 @interface CBPAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) UINavigationController *navigationController;
+@property (strong, nonatomic) CBPNavigationController *navigationController;
 
 - (void)setupNotification;
 
